@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<distributiontype:ProbabilityDistributionRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:distributiontype="http://www.mdsd.tools/probabilitydistributions/distributiontype" id="_0cM7MNMJEemr7qd1LI_fyw" entityName="BasicDistributionTypesRepo">
+  <distributionFamilies id="_4B7EsNMJEemr7qd1LI_fyw" entityName="MulitnomialDistribution" paramStructures="_8MFYAdMJEemr7qd1LI_fyw"/>
+  <distributionFamilies id="_MAoO0NMKEemr7qd1LI_fyw" entityName="BinomialDistribution" paramStructures="_8MFYAdMJEemr7qd1LI_fyw"/>
+  <distributionFamilies id="_UKrfINMKEemr7qd1LI_fyw" entityName="NormalDistribution" type="CONTINUOUS" paramStructures="_aYVUMdMKEemr7qd1LI_fyw _YDMo0dMKEemr7qd1LI_fyw"/>
+  <distributionFamilies id="_ZJa0kNMLEemr7qd1LI_fyw" entityName="DiscreteUniformDisttribution" paramStructures="_V_8iMdMLEemr7qd1LI_fyw _YGuogdMLEemr7qd1LI_fyw"/>
+  <distributionFamilies id="_gp_qENMLEemr7qd1LI_fyw" entityName="ContinuousUniformDistribution" type="CONTINUOUS" paramStructures="_V_8iMdMLEemr7qd1LI_fyw _YGuogdMLEemr7qd1LI_fyw"/>
+  <distributionFamilies id="_FIeZUNMMEemr7qd1LI_fyw" entityName="ExponentialDistribution" type="CONTINUOUS" paramStructures="_Bk0sYdMMEemr7qd1LI_fyw"/>
+  <parameters id="_8MFYAdMJEemr7qd1LI_fyw" entityName="EventProbability"/>
+  <parameters id="_YDMo0dMKEemr7qd1LI_fyw" entityName="Mean"/>
+  <parameters id="_aYVUMdMKEemr7qd1LI_fyw" entityName="Variance"/>
+  <parameters id="_V_8iMdMLEemr7qd1LI_fyw" entityName="Min"/>
+  <parameters id="_YGuogdMLEemr7qd1LI_fyw" entityName="Max"/>
+  <parameters id="_Bk0sYdMMEemr7qd1LI_fyw" entityName="Rate"/>
+</distributiontype:ProbabilityDistributionRepository>

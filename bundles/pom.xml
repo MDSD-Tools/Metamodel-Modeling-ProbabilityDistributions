@@ -12,6 +12,7 @@
 	
 	<modules>
 		<module>tools.mdsd.probdist.model</module>
+		<module>tools.mdsd.probdist.model.basic</module>
 		<module>tools.mdsd.probdist.api</module>
 	</modules>
 	
