@@ -17,10 +17,10 @@
         <genEnumLiterals ecoreEnumLiteral="probdist.ecore#//distributiontype/ProbabilityDistributionType/DISCRETE"/>
         <genEnumLiterals ecoreEnumLiteral="probdist.ecore#//distributiontype/ProbabilityDistributionType/CONTINUOUS"/>
       </genEnums>
-      <genClasses ecoreClass="probdist.ecore#//distributiontype/ProbabilityDistribution">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute probdist.ecore#//distributiontype/ProbabilityDistribution/type"/>
+      <genClasses ecoreClass="probdist.ecore#//distributiontype/ProbabilityDistributionSkeleton">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute probdist.ecore#//distributiontype/ProbabilityDistributionSkeleton/type"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference probdist.ecore#//distributiontype/ProbabilityDistribution/paramStructures"/>
+            ecoreFeature="ecore:EReference probdist.ecore#//distributiontype/ProbabilityDistributionSkeleton/paramStructures"/>
       </genClasses>
       <genClasses ecoreClass="probdist.ecore#//distributiontype/ParameterSignature"/>
       <genClasses ecoreClass="probdist.ecore#//distributiontype/ProbabilityDistributionRepository">

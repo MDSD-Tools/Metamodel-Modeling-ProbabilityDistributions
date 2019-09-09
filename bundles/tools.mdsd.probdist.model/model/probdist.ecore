@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="probdist" nsURI="http://www.mdsd.tools/probdist" nsPrefix="probdist">
   <eSubpackages name="distributiontype" nsURI="http://www.mdsd.tools/probabilitydistributions/distributiontype"
       nsPrefix="distributiontype">
-    <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistribution" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionSkeleton" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//distributiontype/ProbabilityDistributionType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="paramStructures" lowerBound="1"
           upperBound="-1" eType="#//distributiontype/ParameterSignature"/>
@@ -15,7 +15,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="ParameterSignature" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
     <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionRepository">
       <eStructuralFeatures xsi:type="ecore:EReference" name="distributionFamilies"
-          upperBound="-1" eType="#//distributiontype/ProbabilityDistribution" containment="true"/>
+          upperBound="-1" eType="#//distributiontype/ProbabilityDistributionSkeleton"
+          containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//distributiontype/ParameterSignature" containment="true"/>
     </eClassifiers>
@@ -31,7 +32,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionFunction" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="instantiated" lowerBound="1"
-          eType="#//distributiontype/ProbabilityDistribution"/>
+          eType="#//distributiontype/ProbabilityDistributionSkeleton"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="randomVariables" lowerBound="1"
           upperBound="-1" eType="#//distributionfunction/RandomVariable" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="conditionals" upperBound="-1"
