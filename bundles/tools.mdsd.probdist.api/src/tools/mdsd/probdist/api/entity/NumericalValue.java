@@ -5,6 +5,19 @@ import tools.mdsd.probdist.model.probdist.distributionfunction.Domain;
 
 public class NumericalValue extends Value<Number> {
 
+	private NumericalValue(Number value, Domain domain) {
+		this.value = value;
+		this.domain = domain;
+	}
+
+	public static NumericalValue create(Number value, Domain domain) {
+		return new NumericalValue(value, domain);
+	}
+	
+	public static NumericalValue create(Double value) {
+		return new NumericalValue(value, Domain.REAL);
+	}
+
 	public Integer asNatural() {
 		if (isNoNatural()) {
 			throw new ProbabilityDistributionException("The value is not a natural number.");
@@ -18,15 +31,15 @@ public class NumericalValue extends Value<Number> {
 		}
 		return value.intValue();
 	}
-	
+
 	public Double asReal() {
 		return value.doubleValue();
 	}
-	
+
 	private boolean isNoNatural() {
 		return value.intValue() < 0 && domain == Domain.NATURAL;
 	}
-	
+
 	private boolean isRealNumber() {
 		return domain == Domain.REAL;
 	}
