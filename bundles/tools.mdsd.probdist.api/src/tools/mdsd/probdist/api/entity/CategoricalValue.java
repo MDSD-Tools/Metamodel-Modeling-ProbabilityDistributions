@@ -4,9 +4,8 @@ import tools.mdsd.probdist.model.probdist.distributionfunction.Domain;
 
 public class CategoricalValue extends Value<String> {
 	
-	private CategoricalValue(String value) {
-		this.value = value;
-		this.domain = Domain.CATEGORY;
+	protected CategoricalValue(String value) {
+		super(value, Domain.CATEGORY);
 	}
 	
 	public static CategoricalValue create(String value) {

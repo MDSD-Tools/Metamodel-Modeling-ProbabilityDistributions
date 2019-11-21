@@ -5,7 +5,7 @@ import java.util.Set;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.Matrix;
 import tools.mdsd.probdist.api.entity.Vector;
-import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
+import tools.mdsd.probdist.model.probdist.distributionfunction.SimpleParameter;
 
 public interface ParameterParser {
 
@@ -20,11 +20,11 @@ public interface ParameterParser {
 		}
 	}
 	
-	public Double parseScalar(Parameter param);
+	public Double parseScalar(SimpleParameter param);
 	
-	public Vector parseVector(Parameter param);
+	public Vector parseVector(SimpleParameter param);
 	
-	public Matrix parseMatrix(Parameter param);
+	public Matrix parseMatrix(SimpleParameter param);
 	
-	public Set<Sample> parseSampleSpace(Parameter param);
+	public Set<Sample> parseSampleSpace(SimpleParameter param);
 }

@@ -18,3 +18,4 @@ Import-Package: org.eclipse.emf.common.util,
  org.eclipse.emf.ecore.xmi.impl,
  tools.mdsd.probdist.model.probdist.distributionfunction,
  tools.mdsd.probdist.model.probdist.distributiontype
+Export-Package: tools.mdsd.probdist.api.apache.supplier

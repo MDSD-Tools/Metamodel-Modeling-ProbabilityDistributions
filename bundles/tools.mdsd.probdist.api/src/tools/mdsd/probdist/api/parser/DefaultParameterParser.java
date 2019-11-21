@@ -13,7 +13,8 @@ import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.Matrix;
 import tools.mdsd.probdist.api.entity.Vector;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
-import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
+import tools.mdsd.probdist.model.probdist.distributionfunction.ParameterType;
+import tools.mdsd.probdist.model.probdist.distributionfunction.SimpleParameter;
 
 public class DefaultParameterParser implements ParameterParser {
 
@@ -27,8 +28,11 @@ public class DefaultParameterParser implements ParameterParser {
 			SAMPLE_DELIMITER, FLOATING_POINT_PATTERN);
 
 	@Override
-	public Double parseScalar(Parameter param) {
-		return Double.parseDouble(param.getValue().getValue());
+	public Double parseScalar(SimpleParameter param) {
+		if (param.getType() != ParameterType.SCALAR) {
+			throw new IllegalArgumentException("The paramter type is not a scalar.");
+		}
+		return Double.parseDouble(param.getValue());
 	}
 
 	/**
@@ -36,11 +40,14 @@ public class DefaultParameterParser implements ParameterParser {
 	 * values.
 	 */
 	@Override
-	public Vector parseVector(Parameter param) {
-		String value = param.getValue().getValue();
-		checkSchemaConformance(value, VECTOR_PATTERN);
+	public Vector parseVector(SimpleParameter param) {
+		if (param.getType() != ParameterType.VECTOR) {
+			throw new IllegalArgumentException("The paramter type is not a vector.");
+		}
+		
+		checkSchemaConformance(param.getValue(), VECTOR_PATTERN);
 
-		return Vector.of(extractElements(value));
+		return Vector.of(extractElements(param.getValue()));
 	}
 
 	/**
@@ -48,11 +55,14 @@ public class DefaultParameterParser implements ParameterParser {
 	 * [v11,v12,...],[v21,v22,...],... represent vectors.
 	 */
 	@Override
-	public Matrix parseMatrix(Parameter param) {
-		String value = param.getValue().getValue();
-		checkSchemaConformance(value, MATRIX_PATTERN);
+	public Matrix parseMatrix(SimpleParameter param) {
+		if (param.getType() != ParameterType.MATRIX) {
+			throw new IllegalArgumentException("The paramter type is not a matrix.");
+		}
+		
+		checkSchemaConformance(param.getValue(), MATRIX_PATTERN);
 
-		return Matrix.of(extractVectors(value));
+		return Matrix.of(extractVectors(param.getValue()));
 	}
 
 	/**
@@ -60,11 +70,14 @@ public class DefaultParameterParser implements ParameterParser {
 	 * and p1 a double value
 	 */
 	@Override
-	public Set<Sample> parseSampleSpace(Parameter param) {
-		String value = param.getValue().getValue();
-		checkSchemaConformance(value, MATRIX_PATTERN);
+	public Set<Sample> parseSampleSpace(SimpleParameter param) {
+		if (param.getType() != ParameterType.SAMPLESPACE) {
+			throw new IllegalArgumentException("The paramter type is no sample space.");
+		}
 
-		return extractSamples(value);
+		checkSchemaConformance(param.getValue(), MATRIX_PATTERN);
+
+		return extractSamples(param.getValue());
 	}
 
 	private void checkSchemaConformance(String value, String regex) {

@@ -34,6 +34,7 @@
         <genEnumLiterals ecoreEnumLiteral="probdist.ecore#//distributionfunction/ParameterType/SCALAR"/>
         <genEnumLiterals ecoreEnumLiteral="probdist.ecore#//distributionfunction/ParameterType/VECTOR"/>
         <genEnumLiterals ecoreEnumLiteral="probdist.ecore#//distributionfunction/ParameterType/MATRIX"/>
+        <genEnumLiterals ecoreEnumLiteral="probdist.ecore#//distributionfunction/ParameterType/SAMPLESPACE"/>
       </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="probdist.ecore#//distributionfunction/Domain">
         <genEnumLiterals ecoreEnumLiteral="probdist.ecore#//distributionfunction/Domain/NATURAL"/>
@@ -42,29 +43,38 @@
         <genEnumLiterals ecoreEnumLiteral="probdist.ecore#//distributionfunction/Domain/CATEGORY"/>
       </genEnums>
       <genClasses ecoreClass="probdist.ecore#//distributionfunction/ProbabilityDistributionFunctionRepository">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/ProbabilityDistributionFunctionRepository/distributionFunctions"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/ProbabilityDistributionFunctionRepository/distributions"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/ProbabilityDistributionFunctionRepository/params"/>
       </genClasses>
-      <genClasses image="false" ecoreClass="probdist.ecore#//distributionfunction/ProbabilityDistributionFunction">
+      <genClasses ecoreClass="probdist.ecore#//distributionfunction/ProbabilityDistribution">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/ProbabilityDistributionFunction/instantiated"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/ProbabilityDistributionFunction/randomVariables"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/ProbabilityDistributionFunction/conditionals"/>
+            ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/ProbabilityDistribution/instantiated"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/ProbabilityDistributionFunction/params"/>
+            ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/ProbabilityDistribution/params"/>
       </genClasses>
       <genClasses ecoreClass="probdist.ecore#//distributionfunction/Parameter">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/Parameter/instantiated"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/Parameter/value"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute probdist.ecore#//distributionfunction/Parameter/type"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="probdist.ecore#//distributionfunction/Value">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute probdist.ecore#//distributionfunction/Value/domain"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute probdist.ecore#//distributionfunction/Value/value"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/Parameter/representation"/>
       </genClasses>
       <genClasses ecoreClass="probdist.ecore#//distributionfunction/RandomVariable">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute probdist.ecore#//distributionfunction/RandomVariable/valueSpace"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="probdist.ecore#//distributionfunction/AbstractProbabilityDistribution">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/AbstractProbabilityDistribution/randomVariables"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="probdist.ecore#//distributionfunction/ParamRepresentation"/>
+      <genClasses ecoreClass="probdist.ecore#//distributionfunction/SimpleParameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute probdist.ecore#//distributionfunction/SimpleParameter/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute probdist.ecore#//distributionfunction/SimpleParameter/value"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="probdist.ecore#//distributionfunction/ComplexParameter"/>
+      <genClasses ecoreClass="probdist.ecore#//distributionfunction/TabularCPD">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/TabularCPD/cpdEntries"/>
+      </genClasses>
+      <genClasses ecoreClass="probdist.ecore#//distributionfunction/TabularCPDEntry">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute probdist.ecore#//distributionfunction/TabularCPDEntry/conditonals"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributionfunction/TabularCPDEntry/entry"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>

@@ -3,11 +3,12 @@ package tools.mdsd.probdist.api.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
 import tools.mdsd.probdist.model.probdist.distributionfunction.Domain;
+import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.model.probdist.distributionfunction.RandomVariable;
+import tools.mdsd.probdist.model.probdist.distributionfunction.TabularCPD;
 
-public class ConditionalProbabilityDistribution<T> extends ProbabilityDistributionFunction<T> {
+public class ConditionalProbabilityDistribution extends ProbabilityDistributionFunction<CategoricalValue> {
 
 	public static class Conditional {
 
@@ -30,29 +31,49 @@ public class ConditionalProbabilityDistribution<T> extends ProbabilityDistributi
 		public Domain getValueSpace() {
 			return randomVariable.getValueSpace();
 		}
-	}
 
-	private final List<Conditional> conditionals = new ArrayList<>();
-	private final ProbabilityDistributionFunction<T> decoratedPDF;
-
-	public ConditionalProbabilityDistribution(ProbabilityDistributionFunction<T> decoratedPDF,
-			List<Conditional> conditionals) {
-		super(decoratedPDF.distSkeleton);
-
-		if (conditionals.isEmpty()) {
-			throw new ProbabilityDistributionException("Conditionals must not be empty.");
+		@Override
+		public boolean equals(Object other) {
+			if (other instanceof Conditional) {
+				Conditional otherCon = (Conditional) other;
+				return randomVariable.getValueSpace() == otherCon.getValueSpace() && value.equals(otherCon.value);
+			}
+			return false;
 		}
+
+	}
+
+	// private final CPDRepresentation cpdRepresentation;
+	private final CPDEvaluator cpdEvaluator;
+	private final List<Conditional> conditionals;
+
+	public ConditionalProbabilityDistribution(ProbabilityDistribution distribution, TabularCPD tabularCPD) {
+		super(distribution.getInstantiated());
+
+		// this.cpdRepresentation = cpdRepresentation;
+		this.cpdEvaluator = new TabularCPDEvaluator(tabularCPD, distribution);
+		this.conditionals = new ArrayList<>();
+	}
+
+	@Override
+	public Double probability(CategoricalValue value) {
+//		ProbabilityDistributionFunction<?> pdf = cpdRepresentation.getPDFGiven(value.getConditionals())
+//				.orElseThrow(() -> new ProbabilityDistributionException(
+//						"The specified conditionals are not in accordance with the CPD.",
+//						new IllegalArgumentException()));
+//		return pdf.probability(value.value);
+		return cpdEvaluator.evaluate(value, conditionals);
+	}
+
+	@Override
+	public CategoricalValue sample() {
+		return cpdEvaluator.getCPDGiven(conditionals).sample();
+	}
+
+	public ConditionalProbabilityDistribution given(List<Conditional> conditionals) {
+		this.conditionals.clear();
 		this.conditionals.addAll(conditionals);
-		this.decoratedPDF = decoratedPDF;
+		return this;
 	}
-
-	@Override
-	public T sample() {
-		return decoratedPDF.sample();
-	}
-
-	@Override
-	public Double probability(T value) {
-		return decoratedPDF.probability(value);
-	}
+	
 }

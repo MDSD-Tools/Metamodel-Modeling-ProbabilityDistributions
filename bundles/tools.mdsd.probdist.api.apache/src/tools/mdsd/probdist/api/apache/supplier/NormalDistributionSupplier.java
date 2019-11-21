@@ -1,6 +1,6 @@
 package tools.mdsd.probdist.api.apache.supplier;
 
-import static tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil.findParameterWith;
+import static tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil.filterSimpleParametersWith;
 import static tools.mdsd.probdist.api.apache.util.ValueUtil.asDouble2DArray;
 import static tools.mdsd.probdist.api.apache.util.ValueUtil.asDoubleArray;
 
@@ -21,6 +21,7 @@ import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
 import tools.mdsd.probdist.model.probdist.distributionfunction.ParameterType;
 import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
+import tools.mdsd.probdist.model.probdist.distributionfunction.SimpleParameter;
 import tools.mdsd.probdist.model.probdist.distributiontype.ParameterSignature;
 import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
@@ -49,8 +50,8 @@ public class NormalDistributionSupplier implements ProbabilityDistributionSuppli
 
 	@Override
 	public ProbabilityDistributionFunction<?> get(ProbabilityDistribution distribution) {
-		Parameter meanInstant = retrieveMeanParameter(distribution.getParams());
-		Parameter varInstant = retrieveVarianceParameter(distribution.getParams());
+		SimpleParameter meanInstant = retrieveMeanParameter(distribution.getParams());
+		SimpleParameter varInstant = retrieveVarianceParameter(distribution.getParams());
 		if (isUnivariate(meanInstant, varInstant)) {
 			return createUnivariateND(meanInstant, varInstant);
 		}
@@ -67,16 +68,16 @@ public class NormalDistributionSupplier implements ProbabilityDistributionSuppli
 		return distSkeleton;
 	}
 
-	private Parameter retrieveMeanParameter(List<Parameter> params) {
+	private SimpleParameter retrieveMeanParameter(List<Parameter> params) {
 		return retrieveParameter(mean, params);
 	}
 
-	private Parameter retrieveVarianceParameter(List<Parameter> params) {
+	private SimpleParameter retrieveVarianceParameter(List<Parameter> params) {
 		return retrieveParameter(variance, params);
 	}
 
-	private Parameter retrieveParameter(ParameterSignature paramSignature, List<Parameter> params) {
-		List<Parameter> results = findParameterWith(paramSignature, params);
+	private SimpleParameter retrieveParameter(ParameterSignature paramSignature, List<Parameter> params) {
+		List<SimpleParameter> results = filterSimpleParametersWith(paramSignature, params);
 		if (results.isEmpty()) {
 			throw new ProbabilityDistributionException(String
 					.format("There is no paramter instantiation for signature %s", paramSignature.getEntityName()));
@@ -84,22 +85,22 @@ public class NormalDistributionSupplier implements ProbabilityDistributionSuppli
 		return results.get(0);
 	}
 
-	private boolean isUnivariate(Parameter meanInstant, Parameter varInstant) {
+	private boolean isUnivariate(SimpleParameter meanInstant, SimpleParameter varInstant) {
 		return meanInstant.getType() == ParameterType.SCALAR && varInstant.getType() == ParameterType.SCALAR;
 	}
 
-	private boolean isMultivariate(Parameter meanInstant, Parameter varInstant) {
+	private boolean isMultivariate(SimpleParameter meanInstant, SimpleParameter varInstant) {
 		return meanInstant.getType() == ParameterType.VECTOR && varInstant.getType() == ParameterType.MATRIX;
 	}
 
-	private ProbabilityDistributionFunction<?> createUnivariateND(Parameter meanInstant, Parameter varInstant) {
+	private ProbabilityDistributionFunction<?> createUnivariateND(SimpleParameter meanInstant, SimpleParameter varInstant) {
 		ParameterParser parser = ProbabilityDistributionFactory.getParameterParser();
 		double mean = parser.parseScalar(meanInstant);
 		double variance = parser.parseScalar(varInstant);
 		return new UnivariateNormalDistribution(distSkeleton, new NormalDistribution(mean, Math.sqrt(variance)));
 	}
 
-	private ProbabilityDistributionFunction<?> createMultivariateND(Parameter meanInstant, Parameter varInstant) {
+	private ProbabilityDistributionFunction<?> createMultivariateND(SimpleParameter meanInstant, SimpleParameter varInstant) {
 		ParameterParser parser = ProbabilityDistributionFactory.getParameterParser();
 		Vector meanVec = parser.parseVector(meanInstant);
 		Matrix covMatrix = parser.parseMatrix(varInstant);

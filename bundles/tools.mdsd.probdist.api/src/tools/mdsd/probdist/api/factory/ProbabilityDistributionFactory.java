@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
-import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
@@ -31,13 +30,15 @@ public class ProbabilityDistributionFactory {
 	}
 	
 	public static ProbabilityDistributionFactory get() {
-		if (factoryInstance.registry.isEmpty()) {
-			throw new ProbabilityDistributionException("There are no registered distribution realisations.");
-		}
 		return factoryInstance;
 	}
 	
 	public Optional<ProbabilityDistributionFunction<?>> getInstanceOf(ProbabilityDistribution distribution) {
+		if (factoryInstance.registry.isEmpty()) {
+			//TODO logging
+			return Optional.empty();
+		}
+		
 		ProbabilityDistributionSupplier supplier = queryRegister(distribution);
 		if (supplier == null) {
 			return Optional.empty();

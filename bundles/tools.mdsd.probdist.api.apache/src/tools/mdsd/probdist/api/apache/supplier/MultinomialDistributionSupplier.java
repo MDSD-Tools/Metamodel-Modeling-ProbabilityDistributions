@@ -1,6 +1,6 @@
 package tools.mdsd.probdist.api.apache.supplier;
 
-import static tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil.findParameterWith;
+import static tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil.filterSimpleParametersWith;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,12 +19,13 @@ import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser.Sample;
 import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
 import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
+import tools.mdsd.probdist.model.probdist.distributionfunction.SimpleParameter;
 import tools.mdsd.probdist.model.probdist.distributiontype.ParameterSignature;
 import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public class MultinomialDistributionSupplier implements ProbabilityDistributionSupplier {
 
-	private final static String MD_SKELETON_DISTRIBUTION_NAME = "MulitnomialDistribution";
+	private final static String MD_SKELETON_DISTRIBUTION_NAME = "MultinomialDistribution";
 	private final static String EP_PARAMETER_SIGNATURE_NAME = "EventProbability";
 
 	private final ProbabilityDistributionSkeleton distSkeleton;
@@ -37,21 +38,21 @@ public class MultinomialDistributionSupplier implements ProbabilityDistributionS
 								MD_SKELETON_DISTRIBUTION_NAME)));
 		this.eventProbability = DistributionTypeModelUtil.get().findParameterSignatureWith(EP_PARAMETER_SIGNATURE_NAME)
 				.orElseThrow(() -> new ProbabilityDistributionException(
-						String.format("There is no paramter signature with name %s.", EP_PARAMETER_SIGNATURE_NAME)));
+						String.format("There is no parameter signature with name %s.", EP_PARAMETER_SIGNATURE_NAME)));
 	}
 
 	@Override
 	public ProbabilityDistributionFunction<?> get(ProbabilityDistribution distribution) {
-		Parameter instantiated = retrieveParameter(distribution.getParams());
+		SimpleParameter instantiated = retrieveParameter(distribution.getParams());
 		return new MultinomialDistribution(distSkeleton,
 				new EnumeratedDistribution<CategoricalValue>(createSampleSpace(instantiated)));
 	}
 
-	private Parameter retrieveParameter(List<Parameter> params) {
-		List<Parameter> results = findParameterWith(eventProbability, params);
+	private SimpleParameter retrieveParameter(List<Parameter> params) {
+		List<SimpleParameter> results = filterSimpleParametersWith(eventProbability, params);
 		if (results.isEmpty()) {
 			throw new ProbabilityDistributionException(String
-					.format("There is no paramter instantiation for signature %s", eventProbability.getEntityName()));
+					.format("There is no parameter instantiation for signature %s", eventProbability.getEntityName()));
 		}
 		return results.get(0);
 	}
@@ -61,7 +62,7 @@ public class MultinomialDistributionSupplier implements ProbabilityDistributionS
 		return distSkeleton;
 	}
 
-	private List<Pair<CategoricalValue, Double>> createSampleSpace(Parameter instantiated) {
+	private List<Pair<CategoricalValue, Double>> createSampleSpace(SimpleParameter instantiated) {
 		ParameterParser parser = ProbabilityDistributionFactory.getParameterParser();
 		return parser.parseSampleSpace(instantiated).stream().map(this::toPair).collect(Collectors.toList());
 	}

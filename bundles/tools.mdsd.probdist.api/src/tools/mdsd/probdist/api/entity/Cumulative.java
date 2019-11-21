@@ -1,6 +1,6 @@
 package tools.mdsd.probdist.api.entity;
 
-public interface Cumulatable {
+public interface Cumulative {
 
 	public Double cumulativeProbability(Value<?> value);
 }

@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="probdist" nsURI="http://www.mdsd.tools/probdist" nsPrefix="probdist">
   <eSubpackages name="distributiontype" nsURI="http://www.mdsd.tools/probabilitydistributions/distributiontype"
       nsPrefix="distributiontype">
-    <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionSkeleton" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionSkeleton" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//distributiontype/ProbabilityDistributionType"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="paramStructures" lowerBound="1"
           upperBound="-1" eType="#//distributiontype/ParameterSignature"/>
@@ -12,8 +12,9 @@
       <eLiterals name="DISCRETE"/>
       <eLiterals name="CONTINUOUS" value="1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ParameterSignature" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionRepository">
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterSignature" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionRepository"
+        eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
       <eStructuralFeatures xsi:type="ecore:EReference" name="distributionFamilies"
           upperBound="-1" eType="#//distributiontype/ProbabilityDistributionSkeleton"
           containment="true"/>
@@ -24,38 +25,28 @@
   <eSubpackages name="distributionfunction" nsURI="http://www.mdsd.tools/probabilitydistributions/distributionfunction"
       nsPrefix="distributionfunction">
     <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionFunctionRepository">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="distributionFunctions"
-          upperBound="-1" eType="#//distributionfunction/ProbabilityDistributionFunction"
-          containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
-          eType="#//distributionfunction/Parameter" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="distributions" upperBound="-1"
+          eType="#//distributionfunction/AbstractProbabilityDistribution" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="params" lowerBound="1"
+          upperBound="-1" eType="#//distributionfunction/Parameter" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionFunction" abstract="true">
+    <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistribution" eSuperTypes="#//distributionfunction/AbstractProbabilityDistribution">
       <eStructuralFeatures xsi:type="ecore:EReference" name="instantiated" lowerBound="1"
           eType="#//distributiontype/ProbabilityDistributionSkeleton"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="randomVariables" lowerBound="1"
-          upperBound="-1" eType="#//distributionfunction/RandomVariable" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionals" upperBound="-1"
-          eType="#//distributionfunction/RandomVariable" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="params" lowerBound="1"
           upperBound="-1" eType="#//distributionfunction/Parameter"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Parameter">
       <eStructuralFeatures xsi:type="ecore:EReference" name="instantiated" lowerBound="1"
           eType="#//distributiontype/ParameterSignature"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
-          eType="#//distributionfunction/Value" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//distributionfunction/ParameterType"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="domain" lowerBound="1"
-          eType="#//distributionfunction/Domain"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="representation" lowerBound="1"
+          eType="#//distributionfunction/ParamRepresentation" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ParameterType">
       <eLiterals name="SCALAR"/>
       <eLiterals name="VECTOR" value="1"/>
       <eLiterals name="MATRIX" value="2"/>
+      <eLiterals name="SAMPLESPACE" value="3"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RandomVariable">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueSpace" eType="#//distributionfunction/Domain"/>
@@ -65,6 +56,29 @@
       <eLiterals name="INTEGER" value="1"/>
       <eLiterals name="REAL" value="2"/>
       <eLiterals name="CATEGORY" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractProbabilityDistribution" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="randomVariables" lowerBound="1"
+          upperBound="-1" eType="#//distributionfunction/RandomVariable" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ParamRepresentation" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SimpleParameter" eSuperTypes="#//distributionfunction/ParamRepresentation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
+          eType="#//distributionfunction/ParameterType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ComplexParameter" abstract="true"
+        eSuperTypes="#//distributionfunction/ParamRepresentation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TabularCPD" eSuperTypes="#//distributionfunction/ComplexParameter">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="cpdEntries" lowerBound="1"
+          upperBound="-1" eType="#//distributionfunction/TabularCPDEntry" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TabularCPDEntry">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="conditonals" lowerBound="1"
+          upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="entry" lowerBound="1"
+          eType="#//distributionfunction/SimpleParameter" containment="true"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

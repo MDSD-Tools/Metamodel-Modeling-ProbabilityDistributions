@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: tools.mdsd.probdist.api
 Bundle-ActivationPolicy: lazy
-Export-Package: tools.mdsd.probdist.api.entity,
+Export-Package: tools.mdsd.probdist.api.builder,
+ tools.mdsd.probdist.api.entity,
  tools.mdsd.probdist.api.exception,
  tools.mdsd.probdist.api.factory,
  tools.mdsd.probdist.api.parser

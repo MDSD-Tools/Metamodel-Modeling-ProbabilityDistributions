@@ -1,4 +1,4 @@
-package tools.mdsd.probdist.api.basicdists;
+package tools.mdsd.probdist.model.basic;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

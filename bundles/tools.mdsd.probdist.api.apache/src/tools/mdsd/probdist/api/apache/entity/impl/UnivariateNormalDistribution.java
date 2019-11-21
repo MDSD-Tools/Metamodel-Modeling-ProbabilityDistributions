@@ -17,7 +17,7 @@ public class UnivariateNormalDistribution extends UnivariateProbabilityDensityFu
 
 	@Override
 	public Double probability(NumericalValue value) {
-		return normalDist.probability(value.asReal());
+		return normalDist.density(value.asReal());
 	}
 
 	@Override

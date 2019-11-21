@@ -4,7 +4,12 @@ Bundle-Name: Basic
 Bundle-SymbolicName: tools.mdsd.probdist.model.basic
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: tools.mdsd.probdist.api.basicdists.Activator
-Require-Bundle: org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.common,
+ org.eclipse.emf.ecore,
+ tools.mdsd.probdist.model,
+ org.eclipse.emf.ecore.xmi
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: tools.mdsd.probdist.api.basicdists
 Bundle-ActivationPolicy: lazy
+Export-Package: tools.mdsd.probdist.model.basic.loader

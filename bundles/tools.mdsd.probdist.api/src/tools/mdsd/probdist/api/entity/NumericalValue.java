@@ -6,14 +6,13 @@ import tools.mdsd.probdist.model.probdist.distributionfunction.Domain;
 public class NumericalValue extends Value<Number> {
 
 	private NumericalValue(Number value, Domain domain) {
-		this.value = value;
-		this.domain = domain;
+		super(value, domain);
 	}
 
 	public static NumericalValue create(Number value, Domain domain) {
 		return new NumericalValue(value, domain);
 	}
-	
+
 	public static NumericalValue create(Double value) {
 		return new NumericalValue(value, Domain.REAL);
 	}
@@ -42,5 +41,14 @@ public class NumericalValue extends Value<Number> {
 
 	private boolean isRealNumber() {
 		return domain == Domain.REAL;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other instanceof NumericalValue) {
+			NumericalValue otherVal = (NumericalValue) other;
+			return domain == otherVal.getDomain() && value.equals(otherVal.value);
+		}
+		return false;
 	}
 }
