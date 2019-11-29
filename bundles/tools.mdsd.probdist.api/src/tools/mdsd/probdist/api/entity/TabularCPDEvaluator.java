@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution.Conditional;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.model.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
 import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.model.probdist.distributionfunction.TabularCPD;
@@ -76,7 +77,7 @@ public class TabularCPDEvaluator implements CPDEvaluator {
 	}
 
 	private List<Conditional> toCPDConditionals(List<String> conditonals) {
-		return conditonals.stream().map(each -> new Conditional(null, CategoricalValue.create(each)))
+		return conditonals.stream().map(each -> new Conditional(Domain.CATEGORY, CategoricalValue.create(each)))
 				.collect(Collectors.toList());
 	}
 }

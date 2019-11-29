@@ -12,16 +12,16 @@ public class ConditionalProbabilityDistribution extends ProbabilityDistributionF
 
 	public static class Conditional {
 
-		private final RandomVariable randomVariable;
+		private final Domain valueSpace;
 		private final Value<?> value;
 
-		public Conditional(RandomVariable randomVariable, Value<?> value) {
-			this.randomVariable = randomVariable;
+		public Conditional(Domain valueSpace, Value<?> value) {
+			this.valueSpace = valueSpace;
 			this.value = value;
 		}
-
-		public RandomVariable getRandomVariable() {
-			return randomVariable;
+		
+		public Conditional(RandomVariable randomVariable, Value<?> value) {
+			this(randomVariable.getValueSpace(), value);
 		}
 
 		public Value<?> getValue() {
@@ -29,14 +29,14 @@ public class ConditionalProbabilityDistribution extends ProbabilityDistributionF
 		}
 
 		public Domain getValueSpace() {
-			return randomVariable.getValueSpace();
+			return valueSpace;
 		}
 
 		@Override
 		public boolean equals(Object other) {
 			if (other instanceof Conditional) {
 				Conditional otherCon = (Conditional) other;
-				return randomVariable.getValueSpace() == otherCon.getValueSpace() && value.equals(otherCon.value);
+				return getValueSpace() == otherCon.getValueSpace() && value.equals(otherCon.value);
 			}
 			return false;
 		}

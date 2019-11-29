@@ -44,7 +44,7 @@ public class DefaultParameterParser implements ParameterParser {
 		if (param.getType() != ParameterType.VECTOR) {
 			throw new IllegalArgumentException("The paramter type is not a vector.");
 		}
-		
+
 		checkSchemaConformance(param.getValue(), VECTOR_PATTERN);
 
 		return Vector.of(extractElements(param.getValue()));
@@ -59,7 +59,7 @@ public class DefaultParameterParser implements ParameterParser {
 		if (param.getType() != ParameterType.MATRIX) {
 			throw new IllegalArgumentException("The paramter type is not a matrix.");
 		}
-		
+
 		checkSchemaConformance(param.getValue(), MATRIX_PATTERN);
 
 		return Matrix.of(extractVectors(param.getValue()));
@@ -75,7 +75,7 @@ public class DefaultParameterParser implements ParameterParser {
 			throw new IllegalArgumentException("The paramter type is no sample space.");
 		}
 
-		checkSchemaConformance(param.getValue(), MATRIX_PATTERN);
+		checkSchemaConformance(param.getValue(), MATRIX_SAMPLESPACE);
 
 		return extractSamples(param.getValue());
 	}
