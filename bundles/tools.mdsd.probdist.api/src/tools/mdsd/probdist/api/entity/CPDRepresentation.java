@@ -3,7 +3,7 @@ package tools.mdsd.probdist.api.entity;
 import java.util.List;
 import java.util.Optional;
 
-import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution.Conditional;
+import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 
 public interface CPDRepresentation {
 	

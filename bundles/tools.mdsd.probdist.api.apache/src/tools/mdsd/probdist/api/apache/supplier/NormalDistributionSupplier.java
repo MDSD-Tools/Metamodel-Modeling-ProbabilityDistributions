@@ -1,6 +1,6 @@
 package tools.mdsd.probdist.api.apache.supplier;
 
-import static tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil.filterSimpleParametersWith;
+import static tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil.filterParametersWithSimpleRepresentation;
 import static tools.mdsd.probdist.api.apache.util.ValueUtil.asDouble2DArray;
 import static tools.mdsd.probdist.api.apache.util.ValueUtil.asDoubleArray;
 
@@ -77,12 +77,12 @@ public class NormalDistributionSupplier implements ProbabilityDistributionSuppli
 	}
 
 	private SimpleParameter retrieveParameter(ParameterSignature paramSignature, List<Parameter> params) {
-		List<SimpleParameter> results = filterSimpleParametersWith(paramSignature, params);
+		List<Parameter> results = filterParametersWithSimpleRepresentation(paramSignature, params);
 		if (results.isEmpty()) {
 			throw new ProbabilityDistributionException(String
 					.format("There is no paramter instantiation for signature %s", paramSignature.getEntityName()));
 		}
-		return results.get(0);
+		return (SimpleParameter) results.get(0).getRepresentation();
 	}
 
 	private boolean isUnivariate(SimpleParameter meanInstant, SimpleParameter varInstant) {

@@ -24,7 +24,7 @@ public class DefaultParameterParser implements ParameterParser {
 	public static final String VECTOR_PATTERN = String.format("\\[(%1s)(,%2s)+\\]", FLOATING_POINT_PATTERN,
 			FLOATING_POINT_PATTERN);
 	public static final String MATRIX_PATTERN = String.format("\\[(%1s)(,%2s)+\\]", VECTOR_PATTERN, VECTOR_PATTERN);
-	public static final String MATRIX_SAMPLESPACE = String.format("{(.)+,%1s}(%2s{(.)+,%3s})*", FLOATING_POINT_PATTERN,
+	public static final String SAMPLESPACE_PATTERN = String.format("\\{(.)+,%1s\\}(%2s\\{(.)+,%3s\\})*", FLOATING_POINT_PATTERN,
 			SAMPLE_DELIMITER, FLOATING_POINT_PATTERN);
 
 	@Override
@@ -75,7 +75,7 @@ public class DefaultParameterParser implements ParameterParser {
 			throw new IllegalArgumentException("The paramter type is no sample space.");
 		}
 
-		checkSchemaConformance(param.getValue(), MATRIX_SAMPLESPACE);
+		checkSchemaConformance(param.getValue(), SAMPLESPACE_PATTERN);
 
 		return extractSamples(param.getValue());
 	}
@@ -113,11 +113,13 @@ public class DefaultParameterParser implements ParameterParser {
 
 	private Function<String, Sample> toSample() {
 		return s -> {
-			String[] pair = removeAllSpaces(s).split(PAIR_DELIMITER);
-			String value = pair[0];
-			Double probability = Double.parseDouble(pair[1]);
-			return new Sample(CategoricalValue.create(value), probability);
+			String[] pair = removeAllSpaces(removeAllBraces(s)).split(PAIR_DELIMITER);
+			return new Sample(CategoricalValue.create(pair[0]), Double.parseDouble(pair[1]));
 		};
+	}
+
+	private String removeAllBraces(String s) {
+		return s.replaceAll("(\\{|\\})", "");
 	}
 
 	private String removeAllSpaces(String s) {

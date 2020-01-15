@@ -1,6 +1,6 @@
 package tools.mdsd.probdist.api.apache.supplier;
 
-import static tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil.filterSimpleParametersWith;
+import static tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil.filterParametersWithSimpleRepresentation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,12 +49,12 @@ public class MultinomialDistributionSupplier implements ProbabilityDistributionS
 	}
 
 	private SimpleParameter retrieveParameter(List<Parameter> params) {
-		List<SimpleParameter> results = filterSimpleParametersWith(eventProbability, params);
+		List<Parameter> results = filterParametersWithSimpleRepresentation(eventProbability, params);
 		if (results.isEmpty()) {
 			throw new ProbabilityDistributionException(String
 					.format("There is no parameter instantiation for signature %s", eventProbability.getEntityName()));
 		}
-		return results.get(0);
+		return (SimpleParameter) results.get(0).getRepresentation();
 	}
 
 	@Override

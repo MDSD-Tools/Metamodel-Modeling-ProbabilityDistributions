@@ -1,5 +1,6 @@
 package tools.mdsd.probdist.api.apache.entity.impl;
 
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import org.apache.commons.math3.distribution.EnumeratedDistribution;
@@ -32,9 +33,16 @@ public class MultinomialDistribution extends UnivariateProbabilitiyMassFunction 
 	}
 
 	private Pair<CategoricalValue, Double> findPairWith(Value<?> value) {
-		return getSampleSpace().filter(each -> each.getKey().equals(value)).findFirst()
+		return getSampleSpace().filter(s -> withSameValue(s.getKey(), value)).findFirst()
 				.orElseThrow(() -> new ProbabilityDistributionException(
 						String.format("There is no sample with value: %s", value.get())));
+	}
+
+	private boolean withSameValue(CategoricalValue cValue, Value<?> value) {
+		if (CategoricalValue.class.isInstance(value) == false) {
+			return false;
+		}
+		return CategoricalValue.class.cast(value).get().equals(cValue.get());	
 	}
 
 	private Stream<Pair<CategoricalValue, Double>> getSampleSpace() {

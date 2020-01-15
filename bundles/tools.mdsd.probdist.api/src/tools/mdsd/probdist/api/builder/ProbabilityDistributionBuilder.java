@@ -7,7 +7,6 @@ import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
-import tools.mdsd.probdist.model.probdist.distributionfunction.ComplexParameter;
 import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
 import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.model.probdist.distributionfunction.TabularCPD;
@@ -52,15 +51,20 @@ public class ProbabilityDistributionBuilder {
 
 	private ProbabilityDistributionFunction<?> createCPD() {
 		List<Parameter> params = distribution.getParams();
-		if (distribution.getParams().size() == 1 && ComplexParameter.class.isInstance(distribution.getParams())) {
-			if (TabularCPD.class.isInstance(params.get(0))) {
-				return new ConditionalProbabilityDistribution(distribution, (TabularCPD) params.get(0));
-			}
+		if (isTabularCPD(params)) {
+			return new ConditionalProbabilityDistribution(distribution, (TabularCPD) params.get(0).getRepresentation());
 		}
 
 		throw new ProbabilityDistributionException(
 				String.format("The probability distribution of type %s cannot be used as a CPD.",
 						distribution.getInstantiated().getEntityName()));
+	}
+
+	private boolean isTabularCPD(List<Parameter> params) {
+		if (params.size() != 1) {
+			return false;
+		}
+		return TabularCPD.class.isInstance(params.get(0).getRepresentation());
 	}
 
 }

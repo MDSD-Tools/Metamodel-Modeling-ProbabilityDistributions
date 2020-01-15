@@ -2,7 +2,7 @@ package tools.mdsd.probdist.api.entity;
 
 import java.util.List;
 
-import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution.Conditional;
+import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 
 public interface CPDEvaluator {
 	

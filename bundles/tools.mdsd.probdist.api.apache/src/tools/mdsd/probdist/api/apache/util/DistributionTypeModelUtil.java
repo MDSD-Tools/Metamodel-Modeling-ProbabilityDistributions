@@ -1,12 +1,14 @@
 package tools.mdsd.probdist.api.apache.util;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
+import tools.mdsd.probdist.model.probdist.distributionfunction.ComplexParameter;
 import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
 import tools.mdsd.probdist.model.probdist.distributionfunction.SimpleParameter;
 import tools.mdsd.probdist.model.probdist.distributiontype.ParameterSignature;
@@ -15,15 +17,29 @@ import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributi
 
 public class DistributionTypeModelUtil {
 
-	private final static DistributionTypeModelUtil utilInstance = new DistributionTypeModelUtil();
+	private static DistributionTypeModelUtil utilInstance = null;
 
 	private final ProbabilityDistributionRepository basicRepository;
 
+	private DistributionTypeModelUtil(ProbabilityDistributionRepository basicRepository) {
+		this.basicRepository = basicRepository;
+	}
+
 	private DistributionTypeModelUtil() {
-		basicRepository = BasicDistributionTypesLoader.loadRepository();
+		this(BasicDistributionTypesLoader.loadRepository());
 	}
 
 	public static DistributionTypeModelUtil get() {
+		if (utilInstance == null) {
+			utilInstance = new DistributionTypeModelUtil();
+		}
+		return utilInstance;
+	}
+
+	public static DistributionTypeModelUtil get(ProbabilityDistributionRepository basicRepository) {
+		if (utilInstance == null) {
+			utilInstance = new DistributionTypeModelUtil(basicRepository);
+		}
 		return utilInstance;
 	}
 
@@ -40,14 +56,20 @@ public class DistributionTypeModelUtil {
 				.filter(paramSignatureWith(name)).findFirst();
 	}
 
-	public static List<SimpleParameter> filterSimpleParametersWith(ParameterSignature paramSignature,
+	public static List<Parameter> filterParametersWithSimpleRepresentation(ParameterSignature paramSignature,
 			List<Parameter> params) {
-		return params.stream().filter(paramsWithSignature(paramSignature).and(type(SimpleParameter.class)))
-				.map(p -> (SimpleParameter) p).collect(Collectors.toList());
+		return params.stream().filter(paramsWithSignature(paramSignature).and(representation(SimpleParameter.class)))
+				.collect(toList());
 	}
 
-	private static Predicate<Parameter> type(Class<?> givenClass) {
-		return param -> givenClass.isInstance(givenClass);
+	public static List<Parameter> filterParametersWithComplexRepresentation(ParameterSignature paramSignature,
+			List<Parameter> params) {
+		return params.stream().filter(paramsWithSignature(paramSignature).and(representation(ComplexParameter.class)))
+				.collect(toList());
+	}
+
+	private static Predicate<Parameter> representation(Class<?> givenClass) {
+		return param -> givenClass.isInstance(param.getRepresentation());
 	}
 
 	private static Predicate<Parameter> paramsWithSignature(ParameterSignature paramSignature) {

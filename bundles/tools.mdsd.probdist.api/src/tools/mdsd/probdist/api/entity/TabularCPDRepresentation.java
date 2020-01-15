@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution.Conditional;
+import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
 import tools.mdsd.probdist.model.probdist.distributionfunction.RandomVariable;
 
