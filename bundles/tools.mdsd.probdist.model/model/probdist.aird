@@ -115,7 +115,7 @@
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_YFQ1QNLREemWnuNaQ5lQFg" type="4001" element="_YFKuoNLREemWnuNaQ5lQFg" source="_YFPAF9LREemWnuNaQ5lQFg" target="_YFNx8NLREemWnuNaQ5lQFg">
           <children xmi:type="notation:Node" xmi:id="_YFQ1RNLREemWnuNaQ5lQFg" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YFQ1RdLREemWnuNaQ5lQFg" x="2" y="-69"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YFQ1RdLREemWnuNaQ5lQFg" x="65" y="-16"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_YFQ1RtLREemWnuNaQ5lQFg" type="6002">
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YFQ1R9LREemWnuNaQ5lQFg" x="62" y="-10"/>
@@ -461,21 +461,6 @@
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_mpgAOe8iEembr9XvqOEocg" fontName="Segoe UI" fontHeight="8"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mpgAOu8iEembr9XvqOEocg" x="465" y="440" width="133" height="78"/>
-        </children>
-        <children xmi:type="notation:Shape" xmi:id="_1FTWgO8sEembr9XvqOEocg" type="Note" fontName="Segoe UI" description="OCL : Entry -> Parameter type has to be Samplespace" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
-          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_1FTWge8sEembr9XvqOEocg" source="specificStyles">
-            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_1FTWgu8sEembr9XvqOEocg" key="verticalAlignment" value="8"/>
-          </eAnnotations>
-          <children xmi:type="notation:BasicDecorationNode" xmi:id="_1FTWhu8sEembr9XvqOEocg" type="DiagramName">
-            <element xsi:nil="true"/>
-          </children>
-          <children xmi:type="notation:BasicDecorationNode" xmi:id="_1FTWh-8sEembr9XvqOEocg" type="Description">
-            <element xsi:nil="true"/>
-          </children>
-          <styles xmi:type="notation:TextStyle" xmi:id="_1FTWg-8sEembr9XvqOEocg" textAlignment="Center"/>
-          <styles xmi:type="notation:LineTypeStyle" xmi:id="_1FTWhO8sEembr9XvqOEocg"/>
-          <element xsi:nil="true"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1FTWhe8sEembr9XvqOEocg" x="675" y="580"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_TY7P2u85Eembr9XvqOEocg" type="2003" element="_TYyFoO85Eembr9XvqOEocg">
           <children xmi:type="notation:Node" xmi:id="_TY7P3e85Eembr9XvqOEocg" type="5007"/>

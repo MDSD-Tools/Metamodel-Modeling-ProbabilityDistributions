@@ -51,4 +51,9 @@ public class NumericalValue extends Value<Number> {
 		}
 		return false;
 	}
+	
+	@Override
+	public String toString() {
+		return value.toString(); 
+	}
 }

@@ -16,4 +16,10 @@ public class CategoricalValue extends Value<String> {
 	public boolean equals(Object other) {
 		return value.equals(other); 
 	}
+	
+	@Override
+	public String toString() {
+		return value; 
+	}
+	
 }

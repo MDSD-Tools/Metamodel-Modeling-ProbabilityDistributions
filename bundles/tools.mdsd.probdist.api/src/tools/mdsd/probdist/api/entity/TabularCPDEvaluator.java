@@ -3,17 +3,20 @@ package tools.mdsd.probdist.api.entity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import com.google.common.collect.Lists;
 
 import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.model.probdist.distributionfunction.DistributionfunctionFactory;
 import tools.mdsd.probdist.model.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
 import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
+import tools.mdsd.probdist.model.probdist.distributionfunction.SimpleParameter;
 import tools.mdsd.probdist.model.probdist.distributionfunction.TabularCPD;
 import tools.mdsd.probdist.model.probdist.distributionfunction.TabularCPDEntry;
 
@@ -33,29 +36,49 @@ public class TabularCPDEvaluator implements CPDEvaluator {
 
 	private UnivariateProbabilitiyMassFunction createPMFRealisation(ProbabilityDistribution distribution,
 			TabularCPDEntry cpdEntry) {
-		ProbabilityDistribution distStructure = createDistStructure(distribution);
-		swapParamRepresentation(distStructure, cpdEntry);
-		return (UnivariateProbabilitiyMassFunction) ProbabilityDistributionFactory.get().getInstanceOf(distStructure)
+		ProbabilityDistribution pmfEntry = createPMFEntry(distribution);
+		setParamRepresentation(pmfEntry, cpdEntry);
+		return getPMFRealisation(distribution, pmfEntry);
+	}
+
+	private UnivariateProbabilitiyMassFunction getPMFRealisation(ProbabilityDistribution distribution,
+			ProbabilityDistribution pmfEntry) {
+		return (UnivariateProbabilitiyMassFunction) ProbabilityDistributionFactory.get().getInstanceOf(pmfEntry)
 				.orElseThrow(() -> new ProbabilityDistributionException(String.format(
 						"There is no realisation for the PDF: %s", distribution.getInstantiated().getEntityName())));
 	}
 
-	private ProbabilityDistribution createDistStructure(ProbabilityDistribution distribution) {	
-		ProbabilityDistribution distStructure = EcoreUtil.copy(distribution);
-		distStructure.getRandomVariables().addAll(distribution.getRandomVariables());
-		distStructure.setInstantiated(distribution.getInstantiated());
-		distStructure.getParams().addAll(distribution.getParams());
-		return distStructure;
+	private ProbabilityDistribution createPMFEntry(ProbabilityDistribution distribution) {
+		ProbabilityDistribution pmfEntry = createPMFStructure(distribution);
+		Parameter param = createParam(distribution);
+
+		pmfEntry.getParams().add(param);
+
+		return pmfEntry;
 	}
 
-	private void swapParamRepresentation(ProbabilityDistribution distStructure,
-			TabularCPDEntry cpdEntry) {
-		if (distStructure.getParams().size() != 1) {
-			throw new ProbabilityDistributionException("Only a single parameter realisation may be defined.");
-		}
-		
-		Parameter param = distStructure.getParams().get(0);
-		param.setRepresentation(cpdEntry.getEntry());
+	private ProbabilityDistribution createPMFStructure(ProbabilityDistribution distribution) {
+		DistributionfunctionFactory factory = DistributionfunctionFactory.eINSTANCE;
+		ProbabilityDistribution structure = factory.createProbabilityDistribution();
+		structure.getRandomVariables().addAll(distribution.getRandomVariables());
+		structure.setInstantiated(distribution.getInstantiated());
+		return structure;
+	}
+
+	private Parameter createParam(ProbabilityDistribution distribution) {
+		DistributionfunctionFactory factory = DistributionfunctionFactory.eINSTANCE;
+		Parameter param = factory.createParameter();
+		param.setInstantiated(distribution.getParams().get(0).getInstantiated());
+		return param;
+	}
+
+	private void setParamRepresentation(ProbabilityDistribution pmfEntry, TabularCPDEntry cpdEntry) {
+		SimpleParameter sParam = DistributionfunctionFactory.eINSTANCE.createSimpleParameter();
+		sParam.setType(cpdEntry.getEntry().getType());
+		sParam.setValue(cpdEntry.getEntry().getValue());
+
+		Parameter param = pmfEntry.getParams().get(0);
+		param.setRepresentation(sParam);
 	}
 
 	@Override
@@ -71,7 +94,8 @@ public class TabularCPDEvaluator implements CPDEvaluator {
 	private TabularCPDEntry findCPDEntryMatching(List<Conditional> conditionals) {
 		return entryToPMF.keySet().stream().filter(entryMatching(conditionals)).findFirst()
 				.orElseThrow(() -> new ProbabilityDistributionException(
-						"The specified conditionals are not included in the CPD table."));
+						String.format("The conditionals %1s are not included in the CPD table with %2s.",
+								toString(conditionals), toString(entryToPMF.keySet()))));
 	}
 
 	private Predicate<TabularCPDEntry> entryMatching(List<Conditional> queriedConditionals) {
@@ -101,5 +125,28 @@ public class TabularCPDEvaluator implements CPDEvaluator {
 	private List<Conditional> toCPDConditionals(List<String> conditonals) {
 		return conditonals.stream().map(each -> new Conditional(Domain.CATEGORY, CategoricalValue.create(each)))
 				.collect(Collectors.toList());
+	}
+
+	private String toString(List<Conditional> conditionals) {
+		if (conditionals.size() == 1) {
+			return conditionals.get(0).getValue().toString();
+		}
+		StringBuilder builder = new StringBuilder();
+		for (Conditional each : conditionals) {
+			builder.append(String.format(",%s", each.getValue().toString()));
+		}
+		return builder.toString().replaceFirst(",", "");
+	}
+
+	private String toString(Set<TabularCPDEntry> entries) {
+		List<TabularCPDEntry> entryList = Lists.newArrayList(entries);
+		if (entryList.size() == 1) {
+			return entryList.get(0).getEntry().getValue();
+		}
+		StringBuilder builder = new StringBuilder();
+		for (TabularCPDEntry each : entryList) {
+			builder.append(String.format(",%s", each.getEntry().getValue().toString()));
+		}
+		return builder.toString().replaceFirst(",", "");
 	}
 }
