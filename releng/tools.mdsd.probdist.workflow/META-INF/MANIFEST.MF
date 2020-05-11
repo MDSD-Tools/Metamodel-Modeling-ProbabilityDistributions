@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Probability Distributions Ecore Workflow
+Bundle-SymbolicName: tools.mdsd.probdist.workflow
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: tools.mdsd.probdist.workflow
+Require-Bundle: org.eclipse.emf.mwe.core,
+ org.eclipse.emf.mwe2.launch,
+ org.eclipse.emf;bundle-version="2.6.0",
+ org.eclipse.emf.mwe2.lib,
+ org.apache.log4j;bundle-version="1.2.15",
+ org.eclipse.equinox.common;bundle-version="3.9.0",
+ org.eclipse.emf.codegen.ecore;bundle-version="2.13.0",
+ org.apache.commons.logging;bundle-version="1.1.1",
+ org.objectweb.asm;bundle-version="6.1.1",
+ org.eclipse.core.resources,
+ tools.mdsd.ecoreworkflow.mwe2lib;bundle-version="0.1.0",
+ org.eclipse.core.runtime

@@ -1,0 +1,54 @@
+module generate
+
+import org.eclipse.emf.mwe2.ecore.EcoreGenerator
+import tools.mdsd.ecoreworkflow.mwe2lib.bean.EclipseRCPSupportingStandaloneSetup
+import tools.mdsd.ecoreworkflow.mwe2lib.component.ContextDependentMapping
+import tools.mdsd.ecoreworkflow.mwe2lib.component.URISupportingDirectoryCleaner
+import tools.mdsd.ecoreworkflow.mwe2lib.component.GapPatternPostProcessor
+
+var workspaceRoot = "../../"
+
+Workflow {
+	
+	bean = EclipseRCPSupportingStandaloneSetup {
+		scanClassPath = true
+		platformUri = workspaceRoot
+		
+		uriMap = ContextDependentMapping {
+			onRunningPlatform = "platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel"
+			onStandalone = "platform:/resource/tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel"
+		}
+		
+		uriMap = ContextDependentMapping {
+			onRunningPlatform = "platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore"
+			onStandalone = "platform:/resource/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore"
+		}
+		
+		logResourceUriMap = true
+	}
+
+	component = EcoreGenerator {
+		generateCustomClasses = false
+		generateEdit = true
+		genModel = "platform:/resource/tools.mdsd.probdist.model/model/probdist.genmodel"
+		srcPath = "platform:/resource/tools.mdsd.probdist.model/src"
+		srcPath = "platform:/resource/tools.mdsd.probdist.model.edit/src"
+		srcPath = "platform:/resource/tools.mdsd.probdist.model.editor/src"
+	}
+	
+	component = GapPatternPostProcessor {
+		folders = {
+			gen = "platform:/resource/tools.mdsd.probdist.model/src-gen"
+			src = "platform:/resource/tools.mdsd.probdist.model/src"
+		}
+		
+		folders = {
+			gen = "platform:/resource/tools.mdsd.probdist.model.edit/src-gen"
+		}
+		
+		folders = {
+			gen = "platform:/resource/tools.mdsd.probdist.model.editor/src-gen"
+
+		}
+	}	
+}

@@ -11,6 +11,7 @@
 	<packaging>pom</packaging>
 	
 	<modules>
+		<module>tools.mdsd.probdist.workflow</module>
 		<module>tools.mdsd.probdist.updatesite</module>
 	</modules>
 	
