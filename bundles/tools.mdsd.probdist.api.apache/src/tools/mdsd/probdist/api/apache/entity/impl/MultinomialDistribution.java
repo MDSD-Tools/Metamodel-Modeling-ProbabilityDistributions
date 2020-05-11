@@ -1,6 +1,5 @@
 package tools.mdsd.probdist.api.apache.entity.impl;
 
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import org.apache.commons.math3.distribution.EnumeratedDistribution;
