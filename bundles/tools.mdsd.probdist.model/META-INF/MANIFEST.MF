@@ -16,5 +16,6 @@ Export-Package: tools.mdsd.probdist.model.probdist.distributionfunction,
  tools.mdsd.probdist.model.probdist.distributiontype.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  tools.mdsd.modelingfoundations.identifier;visibility:=reexport,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ tools.mdsd.probdist.workflow;resolution:=optional
 Bundle-ActivationPolicy: lazy

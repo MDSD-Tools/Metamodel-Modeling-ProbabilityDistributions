@@ -31,24 +31,6 @@ Workflow {
 		generateCustomClasses = false
 		generateEdit = true
 		genModel = "platform:/resource/tools.mdsd.probdist.model/model/probdist.genmodel"
-		srcPath = "platform:/resource/tools.mdsd.probdist.model/src"
-		srcPath = "platform:/resource/tools.mdsd.probdist.model.edit/src"
-		srcPath = "platform:/resource/tools.mdsd.probdist.model.editor/src"
+		srcPath = "platform:/resource/tools.mdsd.probdist.model/src-gen"
 	}
-	
-	component = GapPatternPostProcessor {
-		folders = {
-			gen = "platform:/resource/tools.mdsd.probdist.model/src-gen"
-			src = "platform:/resource/tools.mdsd.probdist.model/src"
-		}
-		
-		folders = {
-			gen = "platform:/resource/tools.mdsd.probdist.model.edit/src-gen"
-		}
-		
-		folders = {
-			gen = "platform:/resource/tools.mdsd.probdist.model.editor/src-gen"
-
-		}
-	}	
 }
