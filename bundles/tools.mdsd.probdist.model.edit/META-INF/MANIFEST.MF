@@ -8,7 +8,6 @@ Bundle-ClassPath: .
 Bundle-Activator: tools.mdsd.probdist.model.probdist.distributiontype.provider.ProbdistEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: tools.mdsd.probdist.model.probdist.distributionfunction.provider,
  tools.mdsd.probdist.model.probdist.distributiontype.provider
 Require-Bundle: org.eclipse.core.runtime,
