@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>tools.mdsd</groupId>
 		<artifactId>eclipse-parent-updatesite</artifactId>
-		<version>0.3.0</version>
+		<version>0.4.4</version>
 	</parent>
 	<groupId>tools.mdsd.probdist</groupId>
 	<artifactId>parent</artifactId>	
@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 	
 	<properties>
-		<org.palladiosimulator.maven.tychotprefresh.tplocation.2>${project.basedir}/releng/tools.mdsd.probdist.targetplatform/tp.target</org.palladiosimulator.maven.tychotprefresh.tplocation.2>
+		<org.palladiosimulator.maven.tychotprefresh.tplocation.1>${project.basedir}/releng/tools.mdsd.probdist.targetplatform/tp.target</org.palladiosimulator.maven.tychotprefresh.tplocation.1>
 	</properties>
 	
 	<modules>
