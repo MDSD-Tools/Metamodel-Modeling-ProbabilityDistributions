@@ -1,7 +1,7 @@
 package tools.mdsd.probdist.api.entity;
 
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
-import tools.mdsd.probdist.model.probdist.distributionfunction.Domain;
+import tools.mdsd.probdist.distributionfunction.Domain;
 
 public class NumericalValue extends Value<Number> {
 

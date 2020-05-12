@@ -17,11 +17,11 @@ import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionSupplier;
 import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser.Sample;
-import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
-import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
-import tools.mdsd.probdist.model.probdist.distributionfunction.SimpleParameter;
-import tools.mdsd.probdist.model.probdist.distributiontype.ParameterSignature;
-import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributionSkeleton;
+import tools.mdsd.probdist.distributionfunction.Parameter;
+import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
+import tools.mdsd.probdist.distributionfunction.SimpleParameter;
+import tools.mdsd.probdist.distributiontype.ParameterSignature;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public class MultinomialDistributionSupplier implements ProbabilityDistributionSupplier {
 

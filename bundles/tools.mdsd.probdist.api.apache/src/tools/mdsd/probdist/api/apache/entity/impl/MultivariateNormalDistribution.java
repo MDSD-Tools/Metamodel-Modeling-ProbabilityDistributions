@@ -7,7 +7,7 @@ import java.util.List;
 
 import tools.mdsd.probdist.api.entity.MultivariateProbabilityDensityFunction;
 import tools.mdsd.probdist.api.entity.NumericalValue;
-import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributionSkeleton;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public class MultivariateNormalDistribution extends MultivariateProbabilityDensityFunction {
 

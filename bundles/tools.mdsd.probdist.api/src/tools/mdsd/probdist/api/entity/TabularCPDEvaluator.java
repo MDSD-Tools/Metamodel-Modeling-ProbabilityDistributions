@@ -12,13 +12,13 @@ import com.google.common.collect.Lists;
 import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
-import tools.mdsd.probdist.model.probdist.distributionfunction.DistributionfunctionFactory;
-import tools.mdsd.probdist.model.probdist.distributionfunction.Domain;
-import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
-import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
-import tools.mdsd.probdist.model.probdist.distributionfunction.SimpleParameter;
-import tools.mdsd.probdist.model.probdist.distributionfunction.TabularCPD;
-import tools.mdsd.probdist.model.probdist.distributionfunction.TabularCPDEntry;
+import tools.mdsd.probdist.distributionfunction.DistributionfunctionFactory;
+import tools.mdsd.probdist.distributionfunction.Domain;
+import tools.mdsd.probdist.distributionfunction.Parameter;
+import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
+import tools.mdsd.probdist.distributionfunction.SimpleParameter;
+import tools.mdsd.probdist.distributionfunction.TabularCPD;
+import tools.mdsd.probdist.distributionfunction.TabularCPDEntry;
 
 public class TabularCPDEvaluator implements CPDEvaluator {
 

@@ -5,8 +5,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import tools.mdsd.probdist.model.probdist.distributiontype.DistributiontypePackage;
-import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributionRepository;
+import tools.mdsd.probdist.distributiontype.DistributiontypePackage;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 
 public class BasicDistributionTypesLoader {
 

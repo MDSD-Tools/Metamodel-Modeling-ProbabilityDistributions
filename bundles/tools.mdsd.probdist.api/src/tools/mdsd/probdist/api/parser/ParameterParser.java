@@ -5,7 +5,7 @@ import java.util.Set;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.Matrix;
 import tools.mdsd.probdist.api.entity.Vector;
-import tools.mdsd.probdist.model.probdist.distributionfunction.SimpleParameter;
+import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 
 public interface ParameterParser {
 

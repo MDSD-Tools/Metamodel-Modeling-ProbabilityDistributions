@@ -8,12 +8,12 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: tools.mdsd.probdist.model.probdist.distributionfunction,
- tools.mdsd.probdist.model.probdist.distributionfunction.impl,
- tools.mdsd.probdist.model.probdist.distributionfunction.util,
- tools.mdsd.probdist.model.probdist.distributiontype,
- tools.mdsd.probdist.model.probdist.distributiontype.impl,
- tools.mdsd.probdist.model.probdist.distributiontype.util
+Export-Package: tools.mdsd.probdist.distributionfunction,
+ tools.mdsd.probdist.distributionfunction.impl,
+ tools.mdsd.probdist.distributionfunction.util,
+ tools.mdsd.probdist.distributiontype,
+ tools.mdsd.probdist.distributiontype.impl,
+ tools.mdsd.probdist.distributiontype.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  tools.mdsd.modelingfoundations.identifier;visibility:=reexport,
  org.eclipse.core.runtime,

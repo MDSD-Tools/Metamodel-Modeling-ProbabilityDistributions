@@ -7,9 +7,9 @@ import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
-import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
-import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
-import tools.mdsd.probdist.model.probdist.distributionfunction.TabularCPD;
+import tools.mdsd.probdist.distributionfunction.Parameter;
+import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
+import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
 public class ProbabilityDistributionBuilder {
 

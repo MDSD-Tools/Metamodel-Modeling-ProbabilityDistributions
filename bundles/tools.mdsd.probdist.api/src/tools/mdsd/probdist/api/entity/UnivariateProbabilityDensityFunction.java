@@ -1,6 +1,6 @@
 package tools.mdsd.probdist.api.entity;
 
-import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributionSkeleton;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public abstract class UnivariateProbabilityDensityFunction extends ProbabilityDistributionFunction<NumericalValue> {
 

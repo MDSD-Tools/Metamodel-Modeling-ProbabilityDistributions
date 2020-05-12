@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
-import tools.mdsd.probdist.model.probdist.distributionfunction.RandomVariable;
+import tools.mdsd.probdist.distributionfunction.RandomVariable;
 
 public class TabularCPDRepresentation implements CPDRepresentation {
 

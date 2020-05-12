@@ -7,13 +7,13 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import tools.mdsd.probdist.distributionfunction.ComplexParameter;
+import tools.mdsd.probdist.distributionfunction.Parameter;
+import tools.mdsd.probdist.distributionfunction.SimpleParameter;
+import tools.mdsd.probdist.distributiontype.ParameterSignature;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
-import tools.mdsd.probdist.model.probdist.distributionfunction.ComplexParameter;
-import tools.mdsd.probdist.model.probdist.distributionfunction.Parameter;
-import tools.mdsd.probdist.model.probdist.distributionfunction.SimpleParameter;
-import tools.mdsd.probdist.model.probdist.distributiontype.ParameterSignature;
-import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributionRepository;
-import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public class DistributionTypeModelUtil {
 

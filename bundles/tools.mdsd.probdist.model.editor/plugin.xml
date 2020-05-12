@@ -12,9 +12,9 @@
             id="org.eclipse.emf.ecore.Wizard.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
-            id="tools.mdsd.probdist.model.probdist.distributiontype.presentation.DistributiontypeModelWizardID"
+            id="tools.mdsd.probdist.distributiontype.presentation.DistributiontypeModelWizardID"
             name="%_UI_DistributiontypeModelWizard_label"
-            class="tools.mdsd.probdist.model.probdist.distributiontype.presentation.DistributiontypeModelWizard"
+            class="tools.mdsd.probdist.distributiontype.presentation.DistributiontypeModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
             icon="icons/full/obj16/DistributiontypeModelFile.gif">
          <description>%_UI_DistributiontypeModelWizard_description</description>
@@ -25,12 +25,12 @@
    <extension point="org.eclipse.ui.editors">
       <!-- @generated probdist -->
       <editor
-            id="tools.mdsd.probdist.model.probdist.distributiontype.presentation.DistributiontypeEditorID"
+            id="tools.mdsd.probdist.distributiontype.presentation.DistributiontypeEditorID"
             name="%_UI_DistributiontypeEditor_label"
             icon="icons/full/obj16/DistributiontypeModelFile.gif"
             extensions="distributiontype"
-            class="tools.mdsd.probdist.model.probdist.distributiontype.presentation.DistributiontypeEditor"
-            contributorClass="tools.mdsd.probdist.model.probdist.distributiontype.presentation.DistributiontypeActionBarContributor">
+            class="tools.mdsd.probdist.distributiontype.presentation.DistributiontypeEditor"
+            contributorClass="tools.mdsd.probdist.distributiontype.presentation.DistributiontypeActionBarContributor">
       </editor>
    </extension>
 
@@ -40,9 +40,9 @@
             id="org.eclipse.emf.ecore.Wizard.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
-            id="tools.mdsd.probdist.model.probdist.distributionfunction.presentation.DistributionfunctionModelWizardID"
+            id="tools.mdsd.probdist.distributionfunction.presentation.DistributionfunctionModelWizardID"
             name="%_UI_DistributionfunctionModelWizard_label"
-            class="tools.mdsd.probdist.model.probdist.distributionfunction.presentation.DistributionfunctionModelWizard"
+            class="tools.mdsd.probdist.distributionfunction.presentation.DistributionfunctionModelWizard"
             category="org.eclipse.emf.ecore.Wizard.category.ID"
             icon="icons/full/obj16/DistributionfunctionModelFile.gif">
          <description>%_UI_DistributionfunctionModelWizard_description</description>
@@ -53,13 +53,12 @@
    <extension point="org.eclipse.ui.editors">
       <!-- @generated probdist -->
       <editor
-            id="tools.mdsd.probdist.model.probdist.distributionfunction.presentation.DistributionfunctionEditorID"
+            id="tools.mdsd.probdist.distributionfunction.presentation.DistributionfunctionEditorID"
             name="%_UI_DistributionfunctionEditor_label"
             icon="icons/full/obj16/DistributionfunctionModelFile.gif"
             extensions="distributionfunction"
-            class="tools.mdsd.probdist.model.probdist.distributionfunction.presentation.DistributionfunctionEditor"
-            contributorClass="tools.mdsd.probdist.model.probdist.distributionfunction.presentation.DistributionfunctionActionBarContributor">
+            class="tools.mdsd.probdist.distributionfunction.presentation.DistributionfunctionEditor"
+            contributorClass="tools.mdsd.probdist.distributionfunction.presentation.DistributionfunctionActionBarContributor">
       </editor>
    </extension>
-
 </plugin>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="probdist" nsURI="http://www.mdsd.tools/probdist" nsPrefix="probdist">
-  <eSubpackages name="distributiontype" nsURI="http://www.mdsd.tools/probabilitydistributions/distributiontype"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="probdist" nsURI="http://www.mdsd.tools/probdist/1.0" nsPrefix="probdist">
+  <eSubpackages name="distributiontype" nsURI="http://www.mdsd.tools/probdist/distributiontype/1.0"
       nsPrefix="distributiontype">
     <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionSkeleton" eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//distributiontype/ProbabilityDistributionType"/>
@@ -22,7 +22,7 @@
           eType="#//distributiontype/ParameterSignature" containment="true"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="distributionfunction" nsURI="http://www.mdsd.tools/probabilitydistributions/distributionfunction"
+  <eSubpackages name="distributionfunction" nsURI="http://www.mdsd.tools/probdist/distributionfunction/1.0"
       nsPrefix="distributionfunction">
     <eClassifiers xsi:type="ecore:EClass" name="ProbabilityDistributionFunctionRepository"
         eSuperTypes="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">

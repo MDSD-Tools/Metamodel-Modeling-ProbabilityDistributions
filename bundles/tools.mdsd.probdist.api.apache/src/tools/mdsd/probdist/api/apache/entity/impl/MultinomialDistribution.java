@@ -9,7 +9,7 @@ import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.UnivariateProbabilitiyMassFunction;
 import tools.mdsd.probdist.api.entity.Value;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
-import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributionSkeleton;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public class MultinomialDistribution extends UnivariateProbabilitiyMassFunction {
 

@@ -11,7 +11,7 @@
   <testsDirectory xsi:nil="true"/>
   <genPackages prefix="Probdist" basePackage="tools.mdsd" disposableProviderFactory="true"
       ecorePackage="probdist.ecore#/">
-    <nestedGenPackages prefix="Distributiontype" basePackage="tools.mdsd.probdist.model.probdist"
+    <nestedGenPackages prefix="Distributiontype" basePackage="tools.mdsd.probdist"
         disposableProviderFactory="true" ecorePackage="probdist.ecore#//distributiontype">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="probdist.ecore#//distributiontype/ProbabilityDistributionType">
         <genEnumLiterals ecoreEnumLiteral="probdist.ecore#//distributiontype/ProbabilityDistributionType/DISCRETE"/>
@@ -31,7 +31,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference probdist.ecore#//distributiontype/ProbabilityDistributionRepository/parameters"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Distributionfunction" basePackage="tools.mdsd.probdist.model.probdist"
+    <nestedGenPackages prefix="Distributionfunction" basePackage="tools.mdsd.probdist"
         disposableProviderFactory="true" ecorePackage="probdist.ecore#//distributionfunction">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="probdist.ecore#//distributionfunction/ParameterType">
         <genEnumLiterals ecoreEnumLiteral="probdist.ecore#//distributionfunction/ParameterType/SCALAR"/>

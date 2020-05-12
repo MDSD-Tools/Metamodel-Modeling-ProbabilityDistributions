@@ -9,17 +9,16 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated probdist -->
       <package
-            uri="http://www.mdsd.tools/probabilitydistributions/distributiontype"
-            class="tools.mdsd.probdist.model.probdist.distributiontype.DistributiontypePackage"
+            uri="http://www.mdsd.tools/probdist/distributiontype/1.0"
+            class="tools.mdsd.probdist.distributiontype.DistributiontypePackage"
             genModel="model/probdist.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated probdist -->
       <package
-            uri="http://www.mdsd.tools/probabilitydistributions/distributionfunction"
-            class="tools.mdsd.probdist.model.probdist.distributionfunction.DistributionfunctionPackage"
+            uri="http://www.mdsd.tools/probdist/distributionfunction/1.0"
+            class="tools.mdsd.probdist.distributionfunction.DistributionfunctionPackage"
             genModel="model/probdist.genmodel"/>
    </extension>
-
 </plugin>

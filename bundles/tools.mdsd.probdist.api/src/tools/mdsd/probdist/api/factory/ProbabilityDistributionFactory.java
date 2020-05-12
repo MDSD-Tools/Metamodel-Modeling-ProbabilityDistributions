@@ -7,7 +7,7 @@ import java.util.Optional;
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser;
-import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
+import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 
 public class ProbabilityDistributionFactory {
 

@@ -3,8 +3,8 @@ package tools.mdsd.probdist.api.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import tools.mdsd.probdist.model.probdist.distributionfunction.ProbabilityDistribution;
-import tools.mdsd.probdist.model.probdist.distributionfunction.TabularCPD;
+import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
+import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
 public class ConditionalProbabilityDistribution extends ProbabilityDistributionFunction<CategoricalValue>
 		implements Conditionable<ConditionalProbabilityDistribution> {

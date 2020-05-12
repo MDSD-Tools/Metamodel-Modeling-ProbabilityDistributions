@@ -2,8 +2,8 @@ package tools.mdsd.probdist.api.entity;
 
 import java.util.List;
 
-import tools.mdsd.probdist.model.probdist.distributionfunction.Domain;
-import tools.mdsd.probdist.model.probdist.distributionfunction.RandomVariable;
+import tools.mdsd.probdist.distributionfunction.Domain;
+import tools.mdsd.probdist.distributionfunction.RandomVariable;
 
 public interface Conditionable<T> {
 

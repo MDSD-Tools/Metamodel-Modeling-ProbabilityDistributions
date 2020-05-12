@@ -5,11 +5,11 @@ Bundle-SymbolicName: tools.mdsd.probdist.model.edit;singleton:=true
 Automatic-Module-Name: tools.mdsd.probdist.model.edit
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: tools.mdsd.probdist.model.probdist.distributiontype.provider.ProbdistEditPlugin$Implementation
+Bundle-Activator: tools.mdsd.probdist.distributiontype.provider.ProbdistEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: tools.mdsd.probdist.model.probdist.distributionfunction.provider,
- tools.mdsd.probdist.model.probdist.distributiontype.provider
+Export-Package: tools.mdsd.probdist.distributionfunction.provider,
+ tools.mdsd.probdist.distributiontype.provider
 Require-Bundle: org.eclipse.core.runtime,
  tools.mdsd.probdist.model;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport,

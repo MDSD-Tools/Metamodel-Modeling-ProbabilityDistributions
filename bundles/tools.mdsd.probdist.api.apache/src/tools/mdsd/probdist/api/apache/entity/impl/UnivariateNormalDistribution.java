@@ -4,7 +4,7 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 
 import tools.mdsd.probdist.api.entity.NumericalValue;
 import tools.mdsd.probdist.api.entity.UnivariateProbabilityDensityFunction;
-import tools.mdsd.probdist.model.probdist.distributiontype.ProbabilityDistributionSkeleton;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public class UnivariateNormalDistribution extends UnivariateProbabilityDensityFunction {
 
