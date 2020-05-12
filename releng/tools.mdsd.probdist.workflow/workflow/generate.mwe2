@@ -30,6 +30,7 @@ Workflow {
 	component = EcoreGenerator {
 		generateCustomClasses = false
 		generateEdit = true
+		generateEditor = true
 		genModel = "platform:/resource/tools.mdsd.probdist.model/model/probdist.genmodel"
 		srcPath = "platform:/resource/tools.mdsd.probdist.model/src-gen"
 	}
