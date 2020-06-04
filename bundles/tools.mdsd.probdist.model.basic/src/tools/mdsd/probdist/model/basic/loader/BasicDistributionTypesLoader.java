@@ -10,8 +10,8 @@ import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 
 public class BasicDistributionTypesLoader {
 
-	private final static URI BASIC_MODEL_URI = URI.createPlatformPluginURI(
-			"/tools.mdsd.probdist.model.basic/model/BasicDistributionTypes.distributiontype", true);
+	private final static URI BASIC_MODEL_URI = URI
+			.createURI("pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype");
 
 	public static ProbabilityDistributionRepository loadRepository() {
 		ResourceSet rs = new ResourceSetImpl();
