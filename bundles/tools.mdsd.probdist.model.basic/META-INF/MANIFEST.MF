@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  tools.mdsd.probdist.model,
  org.eclipse.emf.ecore.xmi
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: tools.mdsd.probdist.api.basicdists
 Bundle-ActivationPolicy: lazy
 Export-Package: tools.mdsd.probdist.model.basic.loader
