@@ -9,7 +9,7 @@ import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 
-public class ProbabilityDistributionFactory {
+public class ProbabilityDistributionFactory implements IProbabilityDistributionRegistry {
 
 	private final static ProbabilityDistributionFactory factoryInstance = new ProbabilityDistributionFactory();
 
@@ -46,14 +46,16 @@ public class ProbabilityDistributionFactory {
 		return Optional.of(supplier.get(distribution));
 	}
 	
-	public void register(ProbabilityDistributionSupplier supplier) {
+	@Override
+    public void register(ProbabilityDistributionSupplier supplier) {
 		if (isNotAlreadyRegistered(supplier)) {
 			registry.put(supplier.getImplementedSkeleton().getId(), supplier);
 		}
 		//TODO logging
 	}
 	
-	public void unregister(ProbabilityDistributionSupplier supplier) {
+	@Override
+    public void unregister(ProbabilityDistributionSupplier supplier) {
 		registry.remove(supplier.getImplementedSkeleton().getId());
 	}
 	
