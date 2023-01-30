@@ -6,22 +6,24 @@ import java.util.Objects;
 import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
-import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.distributionfunction.Parameter;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
 public class ProbabilityDistributionBuilder {
+    
+    private final IProbabilityDistributionFactory probabilityDistributionFactory;
 
 	private ProbabilityDistribution distribution = null;
 	private boolean asCPD = false;
 
-	private ProbabilityDistributionBuilder() {
-
+	private ProbabilityDistributionBuilder(IProbabilityDistributionFactory probabilityDistributionFactory) {
+	    this.probabilityDistributionFactory = probabilityDistributionFactory;
 	}
 
-	public static ProbabilityDistributionBuilder create() {
-		return new ProbabilityDistributionBuilder();
+	public static ProbabilityDistributionBuilder create(IProbabilityDistributionFactory probabilityDistributionFactory) {
+		return new ProbabilityDistributionBuilder(probabilityDistributionFactory);
 	}
 
 	public ProbabilityDistributionBuilder withStructure(ProbabilityDistribution distribution) {
@@ -40,11 +42,11 @@ public class ProbabilityDistributionBuilder {
 		if (asCPD) {
 			return createCPD();
 		}
-		return queryRealisation();
+		return queryRealisation(probabilityDistributionFactory);
 	}
 
-	private ProbabilityDistributionFunction<?> queryRealisation() {
-		return ProbabilityDistributionFactory.get().getInstanceOf(distribution).orElseThrow(
+	private ProbabilityDistributionFunction<?> queryRealisation(IProbabilityDistributionFactory probabilityDistributionFactory) {
+		return probabilityDistributionFactory.getInstanceOf(distribution).orElseThrow(
 				() -> new ProbabilityDistributionException(String.format("There is no realisation for the PDF: %s",
 						distribution.getInstantiated().getEntityName())));
 	}

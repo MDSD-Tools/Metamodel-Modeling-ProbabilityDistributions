@@ -9,7 +9,7 @@ import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 
-public class ProbabilityDistributionFactory implements IProbabilityDistributionRegistry {
+public class ProbabilityDistributionFactory implements IProbabilityDistributionRegistry, IProbabilityDistributionFactory {
 
 	private final static ProbabilityDistributionFactory factoryInstance = new ProbabilityDistributionFactory();
 
@@ -33,7 +33,8 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
 		return factoryInstance;
 	}
 	
-	public Optional<ProbabilityDistributionFunction<?>> getInstanceOf(ProbabilityDistribution distribution) {
+	@Override
+    public Optional<ProbabilityDistributionFunction<?>> getInstanceOf(ProbabilityDistribution distribution) {
 		if (factoryInstance.registry.isEmpty()) {
 			//TODO logging
 			return Optional.empty();
