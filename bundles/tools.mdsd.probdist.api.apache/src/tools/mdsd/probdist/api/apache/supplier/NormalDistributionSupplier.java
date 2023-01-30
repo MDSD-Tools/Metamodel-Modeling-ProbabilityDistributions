@@ -15,7 +15,6 @@ import tools.mdsd.probdist.api.entity.Matrix;
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
 import tools.mdsd.probdist.api.entity.Vector;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
-import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionSupplier;
 import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.distributionfunction.Parameter;
@@ -34,8 +33,9 @@ public class NormalDistributionSupplier implements ProbabilityDistributionSuppli
 	private final ProbabilityDistributionSkeleton distSkeleton;
 	private final ParameterSignature mean;
 	private final ParameterSignature variance;
+	private final ParameterParser parameterParser;
 
-	public NormalDistributionSupplier() {
+	public NormalDistributionSupplier(ParameterParser parameterParser) {
 		this.distSkeleton = DistributionTypeModelUtil.get().findSkeleton(ND_SKELETON_DISTRIBUTION_NAME)
 				.orElseThrow(() -> new ProbabilityDistributionException(
 						String.format("Skeleton %s is not included in the basic distribtuion model.",
@@ -46,6 +46,7 @@ public class NormalDistributionSupplier implements ProbabilityDistributionSuppli
 		this.variance = DistributionTypeModelUtil.get().findParameterSignatureWith(VARIANCE_PARAMETER_SIGNATURE_NAME)
 				.orElseThrow(() -> new ProbabilityDistributionException(String
 						.format("There is no paramter signature with name %s.", VARIANCE_PARAMETER_SIGNATURE_NAME)));
+		this.parameterParser = parameterParser;
 	}
 
 	@Override
@@ -94,16 +95,14 @@ public class NormalDistributionSupplier implements ProbabilityDistributionSuppli
 	}
 
 	private ProbabilityDistributionFunction<?> createUnivariateND(SimpleParameter meanInstant, SimpleParameter varInstant) {
-		ParameterParser parser = ProbabilityDistributionFactory.getParameterParser();
-		double mean = parser.parseScalar(meanInstant);
-		double variance = parser.parseScalar(varInstant);
+		double mean = parameterParser.parseScalar(meanInstant);
+		double variance = parameterParser.parseScalar(varInstant);
 		return new UnivariateNormalDistribution(distSkeleton, new NormalDistribution(mean, Math.sqrt(variance)));
 	}
 
 	private ProbabilityDistributionFunction<?> createMultivariateND(SimpleParameter meanInstant, SimpleParameter varInstant) {
-		ParameterParser parser = ProbabilityDistributionFactory.getParameterParser();
-		Vector meanVec = parser.parseVector(meanInstant);
-		Matrix covMatrix = parser.parseMatrix(varInstant);
+		Vector meanVec = parameterParser.parseVector(meanInstant);
+		Matrix covMatrix = parameterParser.parseMatrix(varInstant);
 		return new MultivariateNormalDistribution(distSkeleton,
 				new org.apache.commons.math3.distribution.MultivariateNormalDistribution(asDoubleArray(meanVec),
 						asDouble2DArray(covMatrix)));
