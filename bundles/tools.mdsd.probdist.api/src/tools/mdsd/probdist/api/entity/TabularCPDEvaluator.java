@@ -11,7 +11,7 @@ import com.google.common.collect.Lists;
 
 import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
-import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.distributionfunction.DistributionfunctionFactory;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.Parameter;
@@ -23,8 +23,10 @@ import tools.mdsd.probdist.distributionfunction.TabularCPDEntry;
 public class TabularCPDEvaluator implements CPDEvaluator {
 
 	private final Map<TabularCPDEntry, UnivariateProbabilitiyMassFunction> entryToPMF = new HashMap<>();
+	private final  IProbabilityDistributionFactory probabilityDistributionFactory;
 
-	public TabularCPDEvaluator(TabularCPD tabularCPD, ProbabilityDistribution distribution) {
+	public TabularCPDEvaluator(TabularCPD tabularCPD, ProbabilityDistribution distribution, IProbabilityDistributionFactory probabilityDistributionFactory) {
+	    this.probabilityDistributionFactory = probabilityDistributionFactory;
 		initPMFEntries(tabularCPD, distribution);
 	}
 
@@ -43,7 +45,7 @@ public class TabularCPDEvaluator implements CPDEvaluator {
 
 	private UnivariateProbabilitiyMassFunction getPMFRealisation(ProbabilityDistribution distribution,
 			ProbabilityDistribution pmfEntry) {
-		return (UnivariateProbabilitiyMassFunction) ProbabilityDistributionFactory.get().getInstanceOf(pmfEntry)
+		return (UnivariateProbabilitiyMassFunction) probabilityDistributionFactory.getInstanceOf(pmfEntry)
 				.orElseThrow(() -> new ProbabilityDistributionException(String.format(
 						"There is no realisation for the PDF: %s", distribution.getInstantiated().getEntityName())));
 	}
