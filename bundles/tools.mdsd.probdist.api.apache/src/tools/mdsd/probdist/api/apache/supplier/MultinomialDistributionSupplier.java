@@ -13,7 +13,6 @@ import tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
-import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionSupplier;
 import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser.Sample;
@@ -30,8 +29,9 @@ public class MultinomialDistributionSupplier implements ProbabilityDistributionS
 
 	private final ProbabilityDistributionSkeleton distSkeleton;
 	private final ParameterSignature eventProbability;
+	private final ParameterParser parameterParser;
 
-	public MultinomialDistributionSupplier() {
+	public MultinomialDistributionSupplier(ParameterParser parameterParser) {
 		this.distSkeleton = DistributionTypeModelUtil.get().findSkeleton(MD_SKELETON_DISTRIBUTION_NAME)
 				.orElseThrow(() -> new ProbabilityDistributionException(
 						String.format("Skeleton %s is not included in the basic distribtuion model.",
@@ -39,6 +39,7 @@ public class MultinomialDistributionSupplier implements ProbabilityDistributionS
 		this.eventProbability = DistributionTypeModelUtil.get().findParameterSignatureWith(EP_PARAMETER_SIGNATURE_NAME)
 				.orElseThrow(() -> new ProbabilityDistributionException(
 						String.format("There is no parameter signature with name %s.", EP_PARAMETER_SIGNATURE_NAME)));
+		this.parameterParser = parameterParser;
 	}
 
 	@Override
@@ -63,8 +64,7 @@ public class MultinomialDistributionSupplier implements ProbabilityDistributionS
 	}
 
 	private List<Pair<CategoricalValue, Double>> createSampleSpace(SimpleParameter instantiated) {
-		ParameterParser parser = ProbabilityDistributionFactory.getParameterParser();
-		return parser.parseSampleSpace(instantiated).stream().map(this::toPair).collect(Collectors.toList());
+		return parameterParser.parseSampleSpace(instantiated).stream().map(this::toPair).collect(Collectors.toList());
 	}
 
 	public Pair<CategoricalValue, Double> toPair(Sample s) {

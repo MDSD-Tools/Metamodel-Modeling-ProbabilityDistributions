@@ -5,26 +5,14 @@ import java.util.Map;
 import java.util.Optional;
 
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
-import tools.mdsd.probdist.api.parser.DefaultParameterParser;
-import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 
 public class ProbabilityDistributionFactory implements IProbabilityDistributionRegistry, IProbabilityDistributionFactory {
 
-	private static ParameterParser parameterParser = new DefaultParameterParser();
-	
 	private final Map<String, ProbabilityDistributionSupplier> registry = new HashMap<>();
 	
-	public ProbabilityDistributionFactory() {
-	}
-	
-	public static ParameterParser getParameterParser() {
-		return parameterParser;
-	}
-	
-	public static void setParameterParser(ParameterParser paramParser) {
-		parameterParser = paramParser;
-	}
+	public ProbabilityDistributionFactory() { }
+
 	
 	@Override
     public Optional<ProbabilityDistributionFunction<?>> getInstanceOf(ProbabilityDistribution distribution) {
