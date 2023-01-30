@@ -54,7 +54,7 @@ public class ProbabilityDistributionBuilder {
 	private ProbabilityDistributionFunction<?> createCPD() {
 		List<Parameter> params = distribution.getParams();
 		if (isTabularCPD(params)) {
-			return new ConditionalProbabilityDistribution(distribution, (TabularCPD) params.get(0).getRepresentation());
+			return new ConditionalProbabilityDistribution(distribution, (TabularCPD) params.get(0).getRepresentation(), probabilityDistributionFactory);
 		}
 
 		throw new ProbabilityDistributionException(

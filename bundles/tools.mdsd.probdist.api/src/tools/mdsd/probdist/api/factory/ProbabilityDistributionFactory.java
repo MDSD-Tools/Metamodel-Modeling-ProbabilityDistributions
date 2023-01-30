@@ -11,14 +11,11 @@ import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 
 public class ProbabilityDistributionFactory implements IProbabilityDistributionRegistry, IProbabilityDistributionFactory {
 
-	private final static ProbabilityDistributionFactory factoryInstance = new ProbabilityDistributionFactory();
-
 	private static ParameterParser parameterParser = new DefaultParameterParser();
 	
 	private final Map<String, ProbabilityDistributionSupplier> registry = new HashMap<>();
 	
-	private ProbabilityDistributionFactory() {
-		
+	public ProbabilityDistributionFactory() {
 	}
 	
 	public static ParameterParser getParameterParser() {
@@ -29,13 +26,9 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
 		parameterParser = paramParser;
 	}
 	
-	public static ProbabilityDistributionFactory get() {
-		return factoryInstance;
-	}
-	
 	@Override
     public Optional<ProbabilityDistributionFunction<?>> getInstanceOf(ProbabilityDistribution distribution) {
-		if (factoryInstance.registry.isEmpty()) {
+		if (registry.isEmpty()) {
 			//TODO logging
 			return Optional.empty();
 		}

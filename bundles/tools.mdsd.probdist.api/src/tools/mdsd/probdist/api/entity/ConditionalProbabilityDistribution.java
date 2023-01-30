@@ -3,6 +3,7 @@ package tools.mdsd.probdist.api.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
@@ -12,10 +13,10 @@ public class ConditionalProbabilityDistribution extends ProbabilityDistributionF
 	private final CPDEvaluator cpdEvaluator;
 	private final List<Conditional> conditionals;
 
-	public ConditionalProbabilityDistribution(ProbabilityDistribution distribution, TabularCPD tabularCPD) {
+	public ConditionalProbabilityDistribution(ProbabilityDistribution distribution, TabularCPD tabularCPD, IProbabilityDistributionFactory probabilityDistributionFactory) {
 		super(distribution.getInstantiated());
 
-		this.cpdEvaluator = new TabularCPDEvaluator(tabularCPD, distribution);
+		this.cpdEvaluator = new TabularCPDEvaluator(tabularCPD, distribution, probabilityDistributionFactory);
 		this.conditionals = new ArrayList<>();
 	}
 
