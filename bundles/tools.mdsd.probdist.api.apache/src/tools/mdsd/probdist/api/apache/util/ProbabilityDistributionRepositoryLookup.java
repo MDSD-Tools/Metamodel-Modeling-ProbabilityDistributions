@@ -11,31 +11,17 @@ import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
 public class ProbabilityDistributionRepositoryLookup implements IProbabilityDistributionRepositoryLookup {
     
-    private static ProbabilityDistributionRepositoryLookup utilInstance = null;
 
     private final ProbabilityDistributionRepository basicRepository;
 
-    private ProbabilityDistributionRepositoryLookup(ProbabilityDistributionRepository basicRepository) {
+    public ProbabilityDistributionRepositoryLookup(ProbabilityDistributionRepository basicRepository) {
         this.basicRepository = basicRepository;
     }
 
-    private ProbabilityDistributionRepositoryLookup() {
+    public ProbabilityDistributionRepositoryLookup() {
         this(BasicDistributionTypesLoader.loadRepository());
     }
 
-    public static IProbabilityDistributionRepositoryLookup get() {
-        if (utilInstance == null) {
-            utilInstance = new ProbabilityDistributionRepositoryLookup();
-        }
-        return utilInstance;
-    }
-
-    public static IProbabilityDistributionRepositoryLookup get(ProbabilityDistributionRepository basicRepository) {
-        if (utilInstance == null) {
-            utilInstance = new ProbabilityDistributionRepositoryLookup(basicRepository);
-        }
-        return utilInstance;
-    }
 
     @Override
     public Optional<ProbabilityDistributionSkeleton> findSkeleton(String name) {
