@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 import tools.mdsd.probdist.distributiontype.ParameterSignature;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
-import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
 public class ProbabilityDistributionRepositoryLookup implements IProbabilityDistributionRepositoryLookup {
     
@@ -16,10 +15,6 @@ public class ProbabilityDistributionRepositoryLookup implements IProbabilityDist
 
     public ProbabilityDistributionRepositoryLookup(ProbabilityDistributionRepository basicRepository) {
         this.basicRepository = basicRepository;
-    }
-
-    public ProbabilityDistributionRepositoryLookup() {
-        this(BasicDistributionTypesLoader.loadRepository());
     }
 
 
