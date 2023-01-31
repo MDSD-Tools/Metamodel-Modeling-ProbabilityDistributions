@@ -17,23 +17,23 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
 	@Override
     public Optional<ProbabilityDistributionFunction<?>> getInstanceOf(ProbabilityDistribution distribution) {
 		if (registry.isEmpty()) {
-			//TODO logging
-			return Optional.empty();
+		    throw new RuntimeException("registry is empty");
 		}
 		
 		ProbabilityDistributionSupplier supplier = queryRegister(distribution);
 		if (supplier == null) {
-			return Optional.empty();
+		    throw new RuntimeException("probability distribution supplier not found");
 		}
 		return Optional.of(supplier.get(distribution));
 	}
 	
 	@Override
     public void register(ProbabilityDistributionSupplier supplier) {
+	    // lgic invertieren + namen ändern: isAlreadyRegistered -> throw 
 		if (isNotAlreadyRegistered(supplier)) {
 			registry.put(supplier.getImplementedSkeleton().getId(), supplier);
 		}
-		//TODO logging
+		//TODO logging: supplier already registered
 	}
 	
 	@Override
