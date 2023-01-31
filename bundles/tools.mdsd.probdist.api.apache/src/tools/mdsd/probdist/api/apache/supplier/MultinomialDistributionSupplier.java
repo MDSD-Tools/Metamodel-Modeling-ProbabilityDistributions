@@ -9,7 +9,7 @@ import org.apache.commons.math3.distribution.EnumeratedDistribution;
 import org.apache.commons.math3.util.Pair;
 
 import tools.mdsd.probdist.api.apache.entity.impl.MultinomialDistribution;
-import tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil;
+import tools.mdsd.probdist.api.apache.util.ProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
@@ -32,11 +32,11 @@ public class MultinomialDistributionSupplier implements ProbabilityDistributionS
 	private final ParameterParser parameterParser;
 
 	public MultinomialDistributionSupplier(ParameterParser parameterParser) {
-		this.distSkeleton = DistributionTypeModelUtil.get().findSkeleton(MD_SKELETON_DISTRIBUTION_NAME)
+		this.distSkeleton = ProbabilityDistributionRepositoryLookup.get().findSkeleton(MD_SKELETON_DISTRIBUTION_NAME)
 				.orElseThrow(() -> new ProbabilityDistributionException(
 						String.format("Skeleton %s is not included in the basic distribtuion model.",
 								MD_SKELETON_DISTRIBUTION_NAME)));
-		this.eventProbability = DistributionTypeModelUtil.get().findParameterSignatureWith(EP_PARAMETER_SIGNATURE_NAME)
+		this.eventProbability = ProbabilityDistributionRepositoryLookup.get().findParameterSignatureWith(EP_PARAMETER_SIGNATURE_NAME)
 				.orElseThrow(() -> new ProbabilityDistributionException(
 						String.format("There is no parameter signature with name %s.", EP_PARAMETER_SIGNATURE_NAME)));
 		this.parameterParser = parameterParser;
