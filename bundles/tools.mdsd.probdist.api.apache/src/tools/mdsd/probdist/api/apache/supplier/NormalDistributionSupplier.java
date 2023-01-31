@@ -10,7 +10,7 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 
 import tools.mdsd.probdist.api.apache.entity.impl.MultivariateNormalDistribution;
 import tools.mdsd.probdist.api.apache.entity.impl.UnivariateNormalDistribution;
-import tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil;
+import tools.mdsd.probdist.api.apache.util.ProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.entity.Matrix;
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
 import tools.mdsd.probdist.api.entity.Vector;
@@ -36,14 +36,14 @@ public class NormalDistributionSupplier implements ProbabilityDistributionSuppli
 	private final ParameterParser parameterParser;
 
 	public NormalDistributionSupplier(ParameterParser parameterParser) {
-		this.distSkeleton = DistributionTypeModelUtil.get().findSkeleton(ND_SKELETON_DISTRIBUTION_NAME)
+		this.distSkeleton = ProbabilityDistributionRepositoryLookup.get().findSkeleton(ND_SKELETON_DISTRIBUTION_NAME)
 				.orElseThrow(() -> new ProbabilityDistributionException(
 						String.format("Skeleton %s is not included in the basic distribtuion model.",
 								ND_SKELETON_DISTRIBUTION_NAME)));
-		this.mean = DistributionTypeModelUtil.get().findParameterSignatureWith(MEAN_PARAMETER_SIGNATURE_NAME)
+		this.mean = ProbabilityDistributionRepositoryLookup.get().findParameterSignatureWith(MEAN_PARAMETER_SIGNATURE_NAME)
 				.orElseThrow(() -> new ProbabilityDistributionException(
 						String.format("There is no paramter signature with name %s.", MEAN_PARAMETER_SIGNATURE_NAME)));
-		this.variance = DistributionTypeModelUtil.get().findParameterSignatureWith(VARIANCE_PARAMETER_SIGNATURE_NAME)
+		this.variance = ProbabilityDistributionRepositoryLookup.get().findParameterSignatureWith(VARIANCE_PARAMETER_SIGNATURE_NAME)
 				.orElseThrow(() -> new ProbabilityDistributionException(String
 						.format("There is no paramter signature with name %s.", VARIANCE_PARAMETER_SIGNATURE_NAME)));
 		this.parameterParser = parameterParser;
