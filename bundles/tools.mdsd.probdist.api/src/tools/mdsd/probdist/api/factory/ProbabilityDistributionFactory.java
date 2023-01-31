@@ -8,7 +8,7 @@ import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 
 public class ProbabilityDistributionFactory implements IProbabilityDistributionRegistry, IProbabilityDistributionFactory {
-
+    
 	private final Map<String, ProbabilityDistributionSupplier> registry = new HashMap<>();
 	
 	public ProbabilityDistributionFactory() { }
@@ -29,11 +29,10 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
 	
 	@Override
     public void register(ProbabilityDistributionSupplier supplier) {
-	    // lgic invertieren + namen ändern: isAlreadyRegistered -> throw 
-		if (isNotAlreadyRegistered(supplier)) {
-			registry.put(supplier.getImplementedSkeleton().getId(), supplier);
+		if (isAlreadyRegistered(supplier)) {
+		    throw new RuntimeException("supplier " + supplier.getClass().getName() + "already registered");
 		}
-		//TODO logging: supplier already registered
+		registry.put(supplier.getImplementedSkeleton().getId(), supplier);
 	}
 	
 	@Override
@@ -45,8 +44,8 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
 		return registry.get(distribution.getInstantiated().getId());
 	}
 	
-	private boolean isNotAlreadyRegistered(ProbabilityDistributionSupplier supplier) {
-		return !registry.containsKey(supplier.getImplementedSkeleton().getId());
+	private boolean isAlreadyRegistered(ProbabilityDistributionSupplier supplier) {
+		return registry.containsKey(supplier.getImplementedSkeleton().getId());
 	}
 	
 }
