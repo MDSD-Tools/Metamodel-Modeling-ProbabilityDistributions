@@ -9,7 +9,7 @@ import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
-public class ProbabilityDistributionRepositoryLookup {
+public class ProbabilityDistributionRepositoryLookup implements IProbabilityDistributionRepositoryLookup {
     
     private static ProbabilityDistributionRepositoryLookup utilInstance = null;
 
@@ -23,20 +23,21 @@ public class ProbabilityDistributionRepositoryLookup {
         this(BasicDistributionTypesLoader.loadRepository());
     }
 
-    public static ProbabilityDistributionRepositoryLookup get() {
+    public static IProbabilityDistributionRepositoryLookup get() {
         if (utilInstance == null) {
             utilInstance = new ProbabilityDistributionRepositoryLookup();
         }
         return utilInstance;
     }
 
-    public static ProbabilityDistributionRepositoryLookup get(ProbabilityDistributionRepository basicRepository) {
+    public static IProbabilityDistributionRepositoryLookup get(ProbabilityDistributionRepository basicRepository) {
         if (utilInstance == null) {
             utilInstance = new ProbabilityDistributionRepositoryLookup(basicRepository);
         }
         return utilInstance;
     }
 
+    @Override
     public Optional<ProbabilityDistributionSkeleton> findSkeleton(String name) {
         return getAllDistributions().filter(each -> each.getEntityName().equals(name)).findFirst();
     }
@@ -45,6 +46,7 @@ public class ProbabilityDistributionRepositoryLookup {
         return basicRepository.getDistributionFamilies().stream();
     }
 
+    @Override
     public Optional<ParameterSignature> findParameterSignatureWith(String name) {
         return getAllDistributions().flatMap(each -> each.getParamStructures().stream())
                 .filter(paramSignatureWith(name)).findFirst();
