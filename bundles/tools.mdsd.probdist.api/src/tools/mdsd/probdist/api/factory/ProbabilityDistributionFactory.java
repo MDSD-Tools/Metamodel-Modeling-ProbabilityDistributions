@@ -30,7 +30,7 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
 	@Override
     public void register(ProbabilityDistributionSupplier supplier) {
 		if (isAlreadyRegistered(supplier)) {
-		    throw new RuntimeException("supplier " + supplier.getClass().getName() + "already registered");
+		    throw new RuntimeException(String.format("supplier %s already registered", supplier.getClass().getName()));
 		}
 		registry.put(supplier.getImplementedSkeleton().getId(), supplier);
 	}
