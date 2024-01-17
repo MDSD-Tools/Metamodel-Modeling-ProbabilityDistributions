@@ -1,10 +1,9 @@
 package tools.mdsd.probdist.api.factory;
 
-public interface IProbabilityDistributionRegistry {
-    
-    void register(ProbabilityDistributionSupplier supplier);
+public interface IProbabilityDistributionRegistry<V> {
 
-    void unregister(ProbabilityDistributionSupplier supplier);
-    
+    void register(ProbabilityDistributionSupplier<V> supplier);
+
+    void unregister(ProbabilityDistributionSupplier<V> supplier);
 
 }
