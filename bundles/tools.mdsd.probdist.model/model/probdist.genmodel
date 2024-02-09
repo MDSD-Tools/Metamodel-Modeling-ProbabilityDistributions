@@ -4,7 +4,7 @@
     modelDirectory="/tools.mdsd.probdist.model/src-gen" creationIcons="false"
     editDirectory="/tools.mdsd.probdist.model.edit/src-gen" editorDirectory="/tools.mdsd.probdist.model.editor/src-gen"
     modelPluginID="tools.mdsd.probdist.model" modelName="Probdist" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="17.0"
     copyrightFields="false" usedGenPackages="platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier"
     operationReflection="true" importOrganizing="true">
   <foreignModel>probdist.ecore</foreignModel>
