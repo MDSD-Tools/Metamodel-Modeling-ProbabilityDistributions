@@ -1,10 +1,11 @@
 package tools.mdsd.probdist.api.factory;
 
-public interface IProbabilityDistributionRegistry {
-    
-    void register(ProbabilityDistributionSupplier supplier);
+import tools.mdsd.probdist.api.entity.Value;
 
-    void unregister(ProbabilityDistributionSupplier supplier);
-    
+public interface IProbabilityDistributionRegistry<I extends Value<?>> {
+
+    void register(ProbabilityDistributionSupplier<I> supplier);
+
+    void unregister(ProbabilityDistributionSupplier<I> supplier);
 
 }
