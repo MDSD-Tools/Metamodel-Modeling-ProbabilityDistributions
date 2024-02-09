@@ -39,7 +39,7 @@ public class ProbabilityDistributionBuilder {
         return this;
     }
 
-    public ProbabilityDistributionFunction<?> build() {
+    public ProbabilityDistributionFunction<CategoricalValue> build() {
         Objects.requireNonNull(distribution, "There need to be a probability distribution function.");
 
         if (asCPD) {
