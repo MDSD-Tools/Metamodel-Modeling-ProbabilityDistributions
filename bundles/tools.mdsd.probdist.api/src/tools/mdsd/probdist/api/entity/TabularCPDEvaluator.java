@@ -93,16 +93,17 @@ public class TabularCPDEvaluator implements CPDEvaluator {
     }
 
     @Override
-    public Double evaluate(CategoricalValue value, List<Conditional> conditionals) {
+    public Double evaluate(CategoricalValue value, List<Conditional<CategoricalValue>> conditionals) {
         return getCPDGiven(conditionals).probability(value);
     }
 
     @Override
-    public ProbabilityDistributionFunction<CategoricalValue> getCPDGiven(List<Conditional> conditionals) {
+    public ProbabilityDistributionFunction<CategoricalValue> getCPDGiven(
+            List<Conditional<CategoricalValue>> conditionals) {
         return entryToPMF.get(findCPDEntryMatching(conditionals));
     }
 
-    private TabularCPDEntry findCPDEntryMatching(List<Conditional> conditionals) {
+    private TabularCPDEntry findCPDEntryMatching(List<Conditional<CategoricalValue>> conditionals) {
         return entryToPMF.keySet()
             .stream()
             .filter(entryMatching(conditionals))
@@ -112,7 +113,7 @@ public class TabularCPDEvaluator implements CPDEvaluator {
                             toString(conditionals), toString(entryToPMF.keySet()))));
     }
 
-    private Predicate<TabularCPDEntry> entryMatching(List<Conditional> queriedConditionals) {
+    private Predicate<TabularCPDEntry> entryMatching(List<Conditional<CategoricalValue>> queriedConditionals) {
         return e -> {
             List<Conditional> entryConditionals = toCPDConditionals(e.getConditonals());
             if (entryConditionals.size() != queriedConditionals.size()) {
@@ -142,7 +143,7 @@ public class TabularCPDEvaluator implements CPDEvaluator {
             .collect(Collectors.toList());
     }
 
-    private String toString(List<Conditional> conditionals) {
+    private String toString(List<Conditional<CategoricalValue>> conditionals) {
         if (conditionals.size() == 1) {
             return conditionals.get(0)
                 .getValue()

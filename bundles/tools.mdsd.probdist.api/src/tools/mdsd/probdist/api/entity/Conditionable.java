@@ -5,41 +5,41 @@ import java.util.List;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.RandomVariable;
 
-public interface Conditionable<T> {
+public interface Conditionable<T, I extends Value<?>> {
 
-	public static class Conditional {
+    public static class Conditional<I extends Value<?>> {
 
-		private final Domain valueSpace;
-		private final Value<?> value;
+        private final Domain valueSpace;
+        private final I value;
 
-		public Conditional(Domain valueSpace, Value<?> value) {
-			this.valueSpace = valueSpace;
-			this.value = value;
-		}
-		
-		public Conditional(RandomVariable randomVariable, Value<?> value) {
-			this(randomVariable.getValueSpace(), value);
-		}
+        public Conditional(Domain valueSpace, I value) {
+            this.valueSpace = valueSpace;
+            this.value = value;
+        }
 
-		public Value<?> getValue() {
-			return value;
-		}
+        public Conditional(RandomVariable randomVariable, I value) {
+            this(randomVariable.getValueSpace(), value);
+        }
 
-		public Domain getValueSpace() {
-			return valueSpace;
-		}
+        public I getValue() {
+            return value;
+        }
 
-		@Override
-		public boolean equals(Object other) {
-			if (other instanceof Conditional) {
-				Conditional otherCon = (Conditional) other;
-				return getValueSpace() == otherCon.getValueSpace() && value.equals(otherCon.value);
-			}
-			return false;
-		}
+        public Domain getValueSpace() {
+            return valueSpace;
+        }
 
-	}
-	
-	public T given(List<Conditional> conditionals);
-	
+        @Override
+        public boolean equals(Object other) {
+            if (other instanceof Conditional) {
+                Conditional<?> otherCon = (Conditional<?>) other;
+                return getValueSpace() == otherCon.getValueSpace() && value.equals(otherCon.value);
+            }
+            return false;
+        }
+
+    }
+
+    public T given(List<Conditional<I>> conditionals);
+
 }
