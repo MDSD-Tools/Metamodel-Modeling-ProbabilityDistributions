@@ -5,7 +5,7 @@ import java.util.List;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.RandomVariable;
 
-public interface Conditionable<T, I extends Value<?>> {
+public interface Conditionable<I extends Value<?>> {
 
     public static class Conditional<I extends Value<?>> {
 
@@ -40,6 +40,6 @@ public interface Conditionable<T, I extends Value<?>> {
 
     }
 
-    public T given(List<Conditional<I>> conditionals);
+    public Conditionable<I> given(List<Conditional<I>> conditionals);
 
 }
