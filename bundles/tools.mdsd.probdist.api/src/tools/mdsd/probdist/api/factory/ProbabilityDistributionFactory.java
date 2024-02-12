@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import tools.mdsd.probdist.api.builder.CategoricalProbabilityDistributionBuilder;
+import tools.mdsd.probdist.api.builder.ProbabilityDistributionBuilder;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
@@ -59,6 +61,11 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
     @Override
     public ProbabilityCalculator<CategoricalValue> getProbabilityCalculator() {
         return new CategoricalProbabilityCalculator();
+    }
+
+    @Override
+    public ProbabilityDistributionBuilder<CategoricalValue> getProbabilityDistributionBuilder() {
+        return CategoricalProbabilityDistributionBuilder.create(this);
     }
 
 }
