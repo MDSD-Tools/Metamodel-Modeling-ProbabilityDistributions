@@ -10,4 +10,6 @@ public interface IProbabilityDistributionFactory<I extends Value<?>> {
 
     Optional<ProbabilityDistributionFunction<I>> getInstanceOf(ProbabilityDistribution distribution);
 
+    ProbabilityCalculator<I> getProbabilityCalculator();
+
 }
