@@ -1,5 +1,6 @@
 package tools.mdsd.probdist.api.entity;
 
-public interface ConditionableProbabilityDistribution<I extends Value<?>> extends Conditionable<I> {
+public interface ConditionableProbabilityDistribution<I extends Value<?>>
+        extends Conditionable<I>, ProbabilityMeasure<I>, Sampler<I> {
 
 }
