@@ -8,7 +8,7 @@ import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
 public class ConditionalProbabilityDistribution extends ProbabilityDistributionFunction<CategoricalValue>
-        implements Conditionable<ConditionalProbabilityDistribution, CategoricalValue> {
+        implements Conditionable<CategoricalValue> {
 
     private final CPDEvaluator cpdEvaluator;
     private final List<Conditional<CategoricalValue>> conditionals;
