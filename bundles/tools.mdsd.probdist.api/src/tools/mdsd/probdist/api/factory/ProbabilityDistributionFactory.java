@@ -56,4 +56,9 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
             .getId());
     }
 
+    @Override
+    public ProbabilityCalculator<CategoricalValue> getProbabilityCalculator() {
+        return new CategoricalProbabilityCalculator();
+    }
+
 }
