@@ -22,53 +22,57 @@ import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 import tools.mdsd.probdist.distributiontype.ParameterSignature;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
-public class MultinomialDistributionSupplier implements ProbabilityDistributionSupplier {
+public class MultinomialDistributionSupplier implements ProbabilityDistributionSupplier<CategoricalValue> {
 
-	private final static String MD_SKELETON_DISTRIBUTION_NAME = "MultinomialDistribution";
-	private final static String EP_PARAMETER_SIGNATURE_NAME = "EventProbability";
+    private final static String MD_SKELETON_DISTRIBUTION_NAME = "MultinomialDistribution";
+    private final static String EP_PARAMETER_SIGNATURE_NAME = "EventProbability";
 
-	private final ProbabilityDistributionSkeleton distSkeleton;
-	private final ParameterSignature eventProbability;
-	private final ParameterParser parameterParser;
+    private final ProbabilityDistributionSkeleton distSkeleton;
+    private final ParameterSignature eventProbability;
+    private final ParameterParser parameterParser;
 
-	public MultinomialDistributionSupplier(ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
-		this.distSkeleton = probDistRepoLookup.findSkeleton(MD_SKELETON_DISTRIBUTION_NAME)
-				.orElseThrow(() -> new ProbabilityDistributionException(
-						String.format("Skeleton %s is not included in the basic distribtuion model.",
-								MD_SKELETON_DISTRIBUTION_NAME)));
-		this.eventProbability = probDistRepoLookup.findParameterSignatureWith(EP_PARAMETER_SIGNATURE_NAME)
-				.orElseThrow(() -> new ProbabilityDistributionException(
-						String.format("There is no parameter signature with name %s.", EP_PARAMETER_SIGNATURE_NAME)));
-		this.parameterParser = parameterParser;
-	}
+    public MultinomialDistributionSupplier(ParameterParser parameterParser,
+            IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+        this.distSkeleton = probDistRepoLookup.findSkeleton(MD_SKELETON_DISTRIBUTION_NAME)
+            .orElseThrow(() -> new ProbabilityDistributionException(String.format(
+                    "Skeleton %s is not included in the basic distribtuion model.", MD_SKELETON_DISTRIBUTION_NAME)));
+        this.eventProbability = probDistRepoLookup.findParameterSignatureWith(EP_PARAMETER_SIGNATURE_NAME)
+            .orElseThrow(() -> new ProbabilityDistributionException(
+                    String.format("There is no parameter signature with name %s.", EP_PARAMETER_SIGNATURE_NAME)));
+        this.parameterParser = parameterParser;
+    }
 
-	@Override
-	public ProbabilityDistributionFunction<?> get(ProbabilityDistribution distribution) {
-		SimpleParameter instantiated = retrieveParameter(distribution.getParams());
-		return new MultinomialDistribution(distSkeleton,
-				new EnumeratedDistribution<CategoricalValue>(createSampleSpace(instantiated)));
-	}
+    @Override
+    public ProbabilityDistributionFunction<CategoricalValue> get(ProbabilityDistribution distribution) {
+        SimpleParameter instantiated = retrieveParameter(distribution.getParams());
+        return new MultinomialDistribution(distSkeleton,
+                new EnumeratedDistribution<>(createSampleSpace(instantiated)));
+    }
 
-	private SimpleParameter retrieveParameter(List<Parameter> params) {
-		List<Parameter> results = filterParametersWithSimpleRepresentation(eventProbability, params);
-		if (results.isEmpty()) {
-			throw new ProbabilityDistributionException(String
-					.format("There is no parameter instantiation for signature %s", eventProbability.getEntityName()));
-		}
-		return (SimpleParameter) results.get(0).getRepresentation();
-	}
+    private SimpleParameter retrieveParameter(List<Parameter> params) {
+        List<Parameter> results = filterParametersWithSimpleRepresentation(eventProbability, params);
+        if (results.isEmpty()) {
+            throw new ProbabilityDistributionException(String
+                .format("There is no parameter instantiation for signature %s", eventProbability.getEntityName()));
+        }
+        return (SimpleParameter) results.get(0)
+            .getRepresentation();
+    }
 
-	@Override
-	public ProbabilityDistributionSkeleton getImplementedSkeleton() {
-		return distSkeleton;
-	}
+    @Override
+    public ProbabilityDistributionSkeleton getImplementedSkeleton() {
+        return distSkeleton;
+    }
 
-	private List<Pair<CategoricalValue, Double>> createSampleSpace(SimpleParameter instantiated) {
-		return parameterParser.parseSampleSpace(instantiated).stream().map(this::toPair).collect(Collectors.toList());
-	}
+    private List<Pair<CategoricalValue, Double>> createSampleSpace(SimpleParameter instantiated) {
+        return parameterParser.parseSampleSpace(instantiated)
+            .stream()
+            .map(this::toPair)
+            .collect(Collectors.toList());
+    }
 
-	public Pair<CategoricalValue, Double> toPair(Sample s) {
-		return Pair.create(s.value, s.probability);
-	}
+    public Pair<CategoricalValue, Double> toPair(Sample s) {
+        return Pair.create(s.value, s.probability);
+    }
 
 }
