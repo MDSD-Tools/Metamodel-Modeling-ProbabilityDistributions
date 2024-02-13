@@ -115,20 +115,20 @@ public class TabularCPDEvaluator implements CPDEvaluator {
 
     private Predicate<TabularCPDEntry> entryMatching(List<Conditional<CategoricalValue>> queriedConditionals) {
         return e -> {
-            List<Conditional> entryConditionals = toCPDConditionals(e.getConditonals());
+            List<Conditional<CategoricalValue>> entryConditionals = toCPDConditionals(e.getConditonals());
             if (entryConditionals.size() != queriedConditionals.size()) {
                 throw new IllegalArgumentException(
                         "The number of queried conditionals do not match the size of the tabular conditionals");
             }
 
-            for (Conditional each : queriedConditionals) {
+            for (Conditional<CategoricalValue> each : queriedConditionals) {
                 entryConditionals.removeIf(isEqualTo(each));
             }
             return entryConditionals.isEmpty();
         };
     }
 
-    private Predicate<Conditional> isEqualTo(Conditional other) {
+    private Predicate<Conditional<CategoricalValue>> isEqualTo(Conditional<CategoricalValue> other) {
         return given -> {
             if (given.getValueSpace() != other.getValueSpace()) {
                 return false;
@@ -137,9 +137,9 @@ public class TabularCPDEvaluator implements CPDEvaluator {
         };
     }
 
-    private List<Conditional> toCPDConditionals(List<String> conditonals) {
+    private List<Conditional<CategoricalValue>> toCPDConditionals(List<String> conditonals) {
         return conditonals.stream()
-            .map(each -> new Conditional(Domain.CATEGORY, CategoricalValue.create(each)))
+            .map(each -> new Conditional<>(Domain.CATEGORY, CategoricalValue.create(each)))
             .collect(Collectors.toList());
     }
 
@@ -150,7 +150,7 @@ public class TabularCPDEvaluator implements CPDEvaluator {
                 .toString();
         }
         StringBuilder builder = new StringBuilder();
-        for (Conditional each : conditionals) {
+        for (Conditional<CategoricalValue> each : conditionals) {
             builder.append(String.format(",%s", each.getValue()
                 .toString()));
         }
