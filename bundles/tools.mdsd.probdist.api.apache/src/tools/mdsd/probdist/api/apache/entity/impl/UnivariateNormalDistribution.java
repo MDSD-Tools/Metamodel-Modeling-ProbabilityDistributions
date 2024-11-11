@@ -8,21 +8,26 @@ import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public class UnivariateNormalDistribution extends UnivariateProbabilityDensityFunction {
 
-	private final NormalDistribution normalDist;
+    private final NormalDistribution normalDist;
 
-	public UnivariateNormalDistribution(ProbabilityDistributionSkeleton distSkeleton, NormalDistribution normalDist) {
-		super(distSkeleton);
-		this.normalDist = normalDist;
-	}
+    public UnivariateNormalDistribution(ProbabilityDistributionSkeleton distSkeleton, NormalDistribution normalDist) {
+        super(distSkeleton);
+        this.normalDist = normalDist;
+    }
 
-	@Override
-	public Double probability(NumericalValue value) {
-		return normalDist.density(value.asReal());
-	}
+    @Override
+    public Double probability(NumericalValue value) {
+        return normalDist.density(value.asReal());
+    }
 
-	@Override
-	public NumericalValue sample() {
-		return NumericalValue.create(normalDist.sample());
-	}
+    @Override
+    public void init(int seed) {
+        normalDist.reseedRandomGenerator(seed);
+    }
+
+    @Override
+    public NumericalValue sample() {
+        return NumericalValue.create(normalDist.sample());
+    }
 
 }

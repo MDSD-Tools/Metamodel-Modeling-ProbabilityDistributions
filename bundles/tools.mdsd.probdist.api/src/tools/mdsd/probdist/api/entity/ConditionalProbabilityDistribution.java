@@ -27,6 +27,10 @@ public class ConditionalProbabilityDistribution extends ProbabilityDistributionF
     }
 
     @Override
+    public void init(int seed) {
+    }
+
+    @Override
     public CategoricalValue sample() {
         return cpdEvaluator.getCPDGiven(conditionals)
             .sample();

@@ -48,7 +48,9 @@ public class CategoricalProbabilityDistributionBuilder implements ProbabilityDis
         if (asCPD) {
             return createCPD();
         }
-        return queryRealisation(probabilityDistributionFactory);
+        ProbabilityDistributionFunction<CategoricalValue> pdf = queryRealisation(probabilityDistributionFactory);
+        pdf.init(0);
+        return pdf;
     }
 
     private ProbabilityDistributionFunction<CategoricalValue> queryRealisation(
