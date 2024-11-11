@@ -45,8 +45,9 @@ public class MultinomialDistributionSupplier implements ProbabilityDistributionS
     @Override
     public ProbabilityDistributionFunction<CategoricalValue> get(ProbabilityDistribution distribution) {
         SimpleParameter instantiated = retrieveParameter(distribution.getParams());
+        EnumeratedDistribution<CategoricalValue> enumDistribution = new EnumeratedDistribution<>(createSampleSpace(instantiated));
         return new MultinomialDistribution(distSkeleton,
-                new EnumeratedDistribution<>(createSampleSpace(instantiated)));
+                enumDistribution);
     }
 
     private SimpleParameter retrieveParameter(List<Parameter> params) {

@@ -13,39 +13,48 @@ import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public class MultinomialDistribution extends UnivariateProbabilitiyMassFunction {
 
-	private final EnumeratedDistribution<CategoricalValue> multDistribution;
+    private final EnumeratedDistribution<CategoricalValue> multDistribution;
 
-	public MultinomialDistribution(ProbabilityDistributionSkeleton distSkeleton,
-			EnumeratedDistribution<CategoricalValue> multDistribution) {
-		super(distSkeleton);
-		this.multDistribution = multDistribution;
-	}
+    public MultinomialDistribution(ProbabilityDistributionSkeleton distSkeleton,
+            EnumeratedDistribution<CategoricalValue> multDistribution) {
+        super(distSkeleton);
+        this.multDistribution = multDistribution;
+    }
 
-	@Override
-	public Double probability(CategoricalValue value) {
-		return findPairWith(value).getValue();
-	}
+    @Override
+    public Double probability(CategoricalValue value) {
+        return findPairWith(value).getValue();
+    }
 
-	@Override
-	public CategoricalValue sample() {
-		return multDistribution.sample();
-	}
+    @Override
+    public void init(int seed) {
+        multDistribution.reseedRandomGenerator(seed);
+    }
 
-	private Pair<CategoricalValue, Double> findPairWith(Value<?> value) {
-		return getSampleSpace().filter(s -> withSameValue(s.getKey(), value)).findFirst()
-				.orElseThrow(() -> new ProbabilityDistributionException(
-						String.format("There is no sample with value: %s", value.get())));
-	}
+    @Override
+    public CategoricalValue sample() {
+        return multDistribution.sample();
+    }
 
-	private boolean withSameValue(CategoricalValue cValue, Value<?> value) {
-		if (CategoricalValue.class.isInstance(value) == false) {
-			return false;
-		}
-		return CategoricalValue.class.cast(value).get().equals(cValue.get());	
-	}
+    private Pair<CategoricalValue, Double> findPairWith(Value<?> value) {
+        return getSampleSpace().filter(s -> withSameValue(s.getKey(), value))
+            .findFirst()
+            .orElseThrow(() -> new ProbabilityDistributionException(
+                    String.format("There is no sample with value: %s", value.get())));
+    }
 
-	private Stream<Pair<CategoricalValue, Double>> getSampleSpace() {
-		return multDistribution.getPmf().stream();
-	}
+    private boolean withSameValue(CategoricalValue cValue, Value<?> value) {
+        if (CategoricalValue.class.isInstance(value) == false) {
+            return false;
+        }
+        return CategoricalValue.class.cast(value)
+            .get()
+            .equals(cValue.get());
+    }
+
+    private Stream<Pair<CategoricalValue, Double>> getSampleSpace() {
+        return multDistribution.getPmf()
+            .stream();
+    }
 
 }
