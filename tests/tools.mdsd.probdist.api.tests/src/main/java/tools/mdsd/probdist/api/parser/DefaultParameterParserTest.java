@@ -34,7 +34,7 @@ public class DefaultParameterParserTest {
         Set<Sample> actualSamples = parser.parseSampleSpace(param);
 
         Sample[] expectedSamples = Arrays.array(createSample("1", 1.0));
-        assertThat(actualSamples).contains(expectedSamples);
+        assertThat(actualSamples).containsExactly(expectedSamples);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class DefaultParameterParserTest {
 
         Sample[] expectedSamples = Arrays.array(createSample("-2", 0.2), createSample("-1", 0.2),
                 createSample("0", 0.2), createSample("1", 0.2), createSample("2", 0.2));
-        assertThat(actualSamples).contains(expectedSamples);
+        assertThat(actualSamples).containsExactly(expectedSamples);
     }
 
     private Sample createSample(String value, double probability) {
