@@ -49,7 +49,6 @@ public class CategoricalProbabilityDistributionBuilder implements ProbabilityDis
             return createCPD();
         }
         ProbabilityDistributionFunction<CategoricalValue> pdf = queryRealisation(probabilityDistributionFactory);
-        pdf.init(0);
         return pdf;
     }
 
@@ -64,8 +63,9 @@ public class CategoricalProbabilityDistributionBuilder implements ProbabilityDis
     private ProbabilityDistributionFunction<CategoricalValue> createCPD() {
         List<Parameter> params = distribution.getParams();
         if (isTabularCPD(params)) {
-            return new ConditionalProbabilityDistribution(distribution, (TabularCPD) params.get(0)
-                .getRepresentation(), probabilityDistributionFactory);
+            Parameter firstParameter = params.get(0);
+            TabularCPD representation = (TabularCPD) firstParameter.getRepresentation();
+            return new ConditionalProbabilityDistribution(distribution, representation, probabilityDistributionFactory);
         }
 
         throw new ProbabilityDistributionException(String

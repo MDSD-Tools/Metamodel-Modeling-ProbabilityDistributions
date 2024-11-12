@@ -28,12 +28,20 @@ public class ConditionalProbabilityDistribution extends ProbabilityDistributionF
 
     @Override
     public void init(int seed) {
+        if (initialized) {
+            return;
+        }
+        initialized = true;
+        cpdEvaluator.init(seed);
     }
 
     @Override
     public CategoricalValue sample() {
-        return cpdEvaluator.getCPDGiven(conditionals)
-            .sample();
+        if (!initialized) {
+            throw new RuntimeException("not initialized");
+        }
+        ProbabilityDistributionFunction<CategoricalValue> cpdGiven = cpdEvaluator.getCPDGiven(conditionals);
+        return cpdGiven.sample();
     }
 
     @Override

@@ -29,7 +29,11 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
         if (supplier == null) {
             throw new RuntimeException("probability distribution supplier not found");
         }
-        return Optional.of(supplier.get(distribution));
+        ProbabilityDistributionFunction<CategoricalValue> pdf = supplier.get(distribution);
+        if (pdf != null) {
+            pdf.init(0);
+        }
+        return Optional.of(pdf);
     }
 
     @Override

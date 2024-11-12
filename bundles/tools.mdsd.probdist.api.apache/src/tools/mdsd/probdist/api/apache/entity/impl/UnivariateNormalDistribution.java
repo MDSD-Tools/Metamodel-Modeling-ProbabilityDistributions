@@ -22,11 +22,18 @@ public class UnivariateNormalDistribution extends UnivariateProbabilityDensityFu
 
     @Override
     public void init(int seed) {
+        if (initialized) {
+            throw new RuntimeException("initialized");
+        }
+        initialized = true;
         normalDist.reseedRandomGenerator(seed);
     }
 
     @Override
     public NumericalValue sample() {
+        if (!initialized) {
+            throw new RuntimeException("not initialized");
+        }
         return NumericalValue.create(normalDist.sample());
     }
 
