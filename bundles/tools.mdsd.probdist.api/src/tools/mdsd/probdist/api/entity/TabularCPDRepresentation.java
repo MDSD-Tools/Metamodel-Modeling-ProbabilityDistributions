@@ -2,7 +2,7 @@ package tools.mdsd.probdist.api.entity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -75,7 +75,7 @@ public class TabularCPDRepresentation implements CPDRepresentation<CategoricalVa
                 throw new ProbabilityDistributionException("There are no table entries specified.");
             }
 
-            Set<CPDTableEntry> conditionalTable = new HashSet<>();
+            Set<CPDTableEntry> conditionalTable = new LinkedHashSet<>();
             for (TableEntry each : tableEntries) {
                 conditionalTable.add(buildConditionalEntry(each));
             }
@@ -120,7 +120,7 @@ public class TabularCPDRepresentation implements CPDRepresentation<CategoricalVa
         }
     }
 
-    private final Set<CPDTableEntry> conditionalTable = new HashSet<>();
+    private final Set<CPDTableEntry> conditionalTable = new LinkedHashSet<>();
 
     private TabularCPDRepresentation(Set<CPDTableEntry> conditionalTable) {
         this.conditionalTable.addAll(conditionalTable);
