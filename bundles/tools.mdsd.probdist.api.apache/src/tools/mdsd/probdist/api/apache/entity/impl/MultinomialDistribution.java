@@ -28,11 +28,18 @@ public class MultinomialDistribution extends UnivariateProbabilitiyMassFunction 
 
     @Override
     public void init(int seed) {
+        if (initialized) {
+            return;
+        }
+        initialized = true;
         multDistribution.reseedRandomGenerator(seed);
     }
 
     @Override
     public CategoricalValue sample() {
+        if (!initialized) {
+            throw new RuntimeException("not initialized");
+        }
         return multDistribution.sample();
     }
 

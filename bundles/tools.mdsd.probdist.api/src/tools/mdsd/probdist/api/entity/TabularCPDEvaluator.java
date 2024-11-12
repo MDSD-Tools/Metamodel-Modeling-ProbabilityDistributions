@@ -25,15 +25,30 @@ public class TabularCPDEvaluator implements CPDEvaluator {
     private final Map<TabularCPDEntry, UnivariateProbabilitiyMassFunction> entryToPMF = new HashMap<>();
     private final IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory;
 
+    private boolean initialized = false;
+
     public TabularCPDEvaluator(TabularCPD tabularCPD, ProbabilityDistribution distribution,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
         this.probabilityDistributionFactory = probabilityDistributionFactory;
         initPMFEntries(tabularCPD, distribution);
     }
 
+    @Override
+    public void init(int seed) {
+        if (initialized) {
+            return;
+        }
+        initialized = true;
+        for (Map.Entry<TabularCPDEntry, UnivariateProbabilitiyMassFunction> entry : entryToPMF.entrySet()) {
+            UnivariateProbabilitiyMassFunction value = entry.getValue();
+            value.init(seed);
+        }
+    }
+
     private void initPMFEntries(TabularCPD tabularCPD, ProbabilityDistribution distribution) {
         for (TabularCPDEntry each : tabularCPD.getCpdEntries()) {
-            entryToPMF.put(each, createPMFRealisation(distribution, each));
+            UnivariateProbabilitiyMassFunction pmfRealisation = createPMFRealisation(distribution, each);
+            entryToPMF.put(each, pmfRealisation);
         }
     }
 
@@ -82,10 +97,9 @@ public class TabularCPDEvaluator implements CPDEvaluator {
 
     private void setParamRepresentation(ProbabilityDistribution pmfEntry, TabularCPDEntry cpdEntry) {
         SimpleParameter sParam = DistributionfunctionFactory.eINSTANCE.createSimpleParameter();
-        sParam.setType(cpdEntry.getEntry()
-            .getType());
-        sParam.setValue(cpdEntry.getEntry()
-            .getValue());
+        SimpleParameter entry = cpdEntry.getEntry();
+        sParam.setType(entry.getType());
+        sParam.setValue(entry.getValue());
 
         Parameter param = pmfEntry.getParams()
             .get(0);
@@ -100,7 +114,11 @@ public class TabularCPDEvaluator implements CPDEvaluator {
     @Override
     public ProbabilityDistributionFunction<CategoricalValue> getCPDGiven(
             List<Conditional<CategoricalValue>> conditionals) {
-        return entryToPMF.get(findCPDEntryMatching(conditionals));
+        if (!initialized) {
+            throw new RuntimeException("not initilaized");
+        }
+        TabularCPDEntry cpdEntryMatching = findCPDEntryMatching(conditionals);
+        return entryToPMF.get(cpdEntryMatching);
     }
 
     private TabularCPDEntry findCPDEntryMatching(List<Conditional<CategoricalValue>> conditionals) {

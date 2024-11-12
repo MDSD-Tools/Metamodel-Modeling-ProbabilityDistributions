@@ -26,11 +26,18 @@ public class MultivariateNormalDistribution extends MultivariateProbabilityDensi
 
     @Override
     public void init(int seed) {
+        if (initialized) {
+            throw new RuntimeException("initialized");
+        }
+        initialized = true;
         normalDistribution.reseedRandomGenerator(seed);
     }
 
     @Override
     public List<NumericalValue> sample() {
+        if (!initialized) {
+            throw new RuntimeException("not initialized");
+        }
         return toValueList(normalDistribution.sample(), v -> NumericalValue.create(v));
     }
 
