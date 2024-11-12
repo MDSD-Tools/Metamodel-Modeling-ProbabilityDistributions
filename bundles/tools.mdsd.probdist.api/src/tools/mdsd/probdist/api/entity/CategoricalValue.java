@@ -1,6 +1,7 @@
 package tools.mdsd.probdist.api.entity;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import tools.mdsd.probdist.distributionfunction.Domain;
 
@@ -32,7 +33,8 @@ public class CategoricalValue extends Value<String> {
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return new HashCodeBuilder(5, 37).append(value)
+            .toHashCode();
     }
 
     @Override
