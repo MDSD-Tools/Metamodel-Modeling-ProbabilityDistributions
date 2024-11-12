@@ -6,4 +6,5 @@ Bundle-Version: 0.1.0.qualifier
 Fragment-Host: tools.mdsd.probdist.api;bundle-version="0.1.0"
 Automatic-Module-Name: tools.mdsd.probdist.api.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Require-Bundle: org.junit;bundle-version="4.13.0"
+Require-Bundle: org.junit;bundle-version="4.13.0",
+ org.assertj;bundle-version="3.20.2"
