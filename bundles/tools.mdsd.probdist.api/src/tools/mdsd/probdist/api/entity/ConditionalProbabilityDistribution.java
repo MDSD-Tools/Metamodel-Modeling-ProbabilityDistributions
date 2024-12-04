@@ -2,6 +2,7 @@ package tools.mdsd.probdist.api.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.random.ISeedProvider;
@@ -28,7 +29,7 @@ public class ConditionalProbabilityDistribution extends ProbabilityDistributionF
     }
 
     @Override
-    public void init(ISeedProvider seedProvider) {
+    public void init(Optional<ISeedProvider> seedProvider) {
         if (initialized) {
             return;
         }

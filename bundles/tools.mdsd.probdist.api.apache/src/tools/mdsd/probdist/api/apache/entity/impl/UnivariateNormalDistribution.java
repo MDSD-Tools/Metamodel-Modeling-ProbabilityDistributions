@@ -1,5 +1,7 @@
 package tools.mdsd.probdist.api.apache.entity.impl;
 
+import java.util.Optional;
+
 import org.apache.commons.math3.distribution.NormalDistribution;
 
 import tools.mdsd.probdist.api.entity.NumericalValue;
@@ -22,12 +24,12 @@ public class UnivariateNormalDistribution extends UnivariateProbabilityDensityFu
     }
 
     @Override
-    public void init(ISeedProvider seedProvider) {
+    public void init(Optional<ISeedProvider> seedProvider) {
         if (initialized) {
             throw new RuntimeException("initialized");
         }
         initialized = true;
-        normalDist.reseedRandomGenerator(seedProvider.getLong());
+        seedProvider.ifPresent(sp -> normalDist.reseedRandomGenerator(sp.getLong()));
     }
 
     @Override

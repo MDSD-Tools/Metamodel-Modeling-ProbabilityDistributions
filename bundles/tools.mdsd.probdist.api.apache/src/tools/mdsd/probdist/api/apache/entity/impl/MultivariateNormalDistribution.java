@@ -4,6 +4,7 @@ import static tools.mdsd.probdist.api.apache.util.ValueUtil.asDoubleArray;
 import static tools.mdsd.probdist.api.apache.util.ValueUtil.toValueList;
 
 import java.util.List;
+import java.util.Optional;
 
 import tools.mdsd.probdist.api.entity.MultivariateProbabilityDensityFunction;
 import tools.mdsd.probdist.api.entity.NumericalValue;
@@ -26,12 +27,12 @@ public class MultivariateNormalDistribution extends MultivariateProbabilityDensi
     }
 
     @Override
-    public void init(ISeedProvider seedProvider) {
+    public void init(Optional<ISeedProvider> seedProvider) {
         if (initialized) {
             throw new RuntimeException("initialized");
         }
         initialized = true;
-        normalDistribution.reseedRandomGenerator(seedProvider.getLong());
+        seedProvider.ifPresent(sp -> normalDistribution.reseedRandomGenerator(sp.getLong()));
     }
 
     @Override
