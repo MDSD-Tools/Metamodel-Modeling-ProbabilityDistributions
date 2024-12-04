@@ -1,5 +1,6 @@
 package tools.mdsd.probdist.api.apache.entity.impl;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.apache.commons.math3.distribution.EnumeratedDistribution;
@@ -28,12 +29,12 @@ public class MultinomialDistribution extends UnivariateProbabilitiyMassFunction 
     }
 
     @Override
-    public void init(ISeedProvider seedProvider) {
+    public void init(Optional<ISeedProvider> seedProvider) {
         if (initialized) {
             return;
         }
         initialized = true;
-        multDistribution.reseedRandomGenerator(seedProvider.getLong());
+        seedProvider.ifPresent(sp -> multDistribution.reseedRandomGenerator(sp.getLong()));
     }
 
     @Override

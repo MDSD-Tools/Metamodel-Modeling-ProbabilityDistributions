@@ -15,9 +15,9 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
         IProbabilityDistributionFactory<CategoricalValue> {
 
     private final Map<String, ProbabilityDistributionSupplier<CategoricalValue>> registry = new HashMap<>();
-    private final ISeedProvider seedProvider;
+    private final Optional<ISeedProvider> seedProvider;
 
-    public ProbabilityDistributionFactory(ISeedProvider seedProvider) {
+    public ProbabilityDistributionFactory(Optional<ISeedProvider> seedProvider) {
         this.seedProvider = seedProvider;
     }
 

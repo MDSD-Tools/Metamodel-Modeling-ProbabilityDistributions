@@ -3,6 +3,7 @@ package tools.mdsd.probdist.api.entity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -35,7 +36,7 @@ public class TabularCPDEvaluator implements CPDEvaluator {
     }
 
     @Override
-    public void init(ISeedProvider seedProvider) {
+    public void init(Optional<ISeedProvider> seedProvider) {
         if (initialized) {
             return;
         }

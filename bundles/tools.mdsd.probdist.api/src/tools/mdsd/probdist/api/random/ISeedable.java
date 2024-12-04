@@ -1,5 +1,7 @@
 package tools.mdsd.probdist.api.random;
 
+import java.util.Optional;
+
 public interface ISeedable {
-    void init(ISeedProvider seedProvider);
+    void init(Optional<ISeedProvider> seedProvider);
 }
