@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
@@ -27,12 +28,12 @@ public class ConditionalProbabilityDistribution extends ProbabilityDistributionF
     }
 
     @Override
-    public void init(int seed) {
+    public void init(ISeedProvider seedProvider) {
         if (initialized) {
             return;
         }
         initialized = true;
-        cpdEvaluator.init(seed);
+        cpdEvaluator.init(seedProvider);
     }
 
     @Override

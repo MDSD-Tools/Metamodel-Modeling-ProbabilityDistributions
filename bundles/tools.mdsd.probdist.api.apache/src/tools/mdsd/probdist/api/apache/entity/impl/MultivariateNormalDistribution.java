@@ -7,6 +7,7 @@ import java.util.List;
 
 import tools.mdsd.probdist.api.entity.MultivariateProbabilityDensityFunction;
 import tools.mdsd.probdist.api.entity.NumericalValue;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public class MultivariateNormalDistribution extends MultivariateProbabilityDensityFunction {
@@ -25,12 +26,12 @@ public class MultivariateNormalDistribution extends MultivariateProbabilityDensi
     }
 
     @Override
-    public void init(int seed) {
+    public void init(ISeedProvider seedProvider) {
         if (initialized) {
             throw new RuntimeException("initialized");
         }
         initialized = true;
-        normalDistribution.reseedRandomGenerator(seed);
+        normalDistribution.reseedRandomGenerator(seedProvider.getLong());
     }
 
     @Override

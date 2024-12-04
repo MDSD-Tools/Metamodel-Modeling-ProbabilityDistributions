@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 import tools.mdsd.probdist.distributionfunction.DistributionfunctionFactory;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.Parameter;
@@ -34,14 +35,14 @@ public class TabularCPDEvaluator implements CPDEvaluator {
     }
 
     @Override
-    public void init(int seed) {
+    public void init(ISeedProvider seedProvider) {
         if (initialized) {
             return;
         }
         initialized = true;
         for (Map.Entry<TabularCPDEntry, UnivariateProbabilitiyMassFunction> entry : entryToPMF.entrySet()) {
             UnivariateProbabilitiyMassFunction value = entry.getValue();
-            value.init(seed);
+            value.init(seedProvider);
         }
     }
 
