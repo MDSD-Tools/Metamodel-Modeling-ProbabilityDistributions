@@ -1,8 +1,7 @@
 package tools.mdsd.probdist.api.entity;
 
-public interface Sampler<T> {
+import tools.mdsd.probdist.api.random.ISeedable;
 
-    void init(int seed);
-
+public interface Sampler<T> extends ISeedable {
     public T sample();
 }
