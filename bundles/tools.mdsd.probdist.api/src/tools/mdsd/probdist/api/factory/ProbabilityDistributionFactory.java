@@ -8,14 +8,17 @@ import tools.mdsd.probdist.api.builder.CategoricalProbabilityDistributionBuilder
 import tools.mdsd.probdist.api.builder.ProbabilityDistributionBuilder;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.ProbabilityDistributionFunction;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 
 public class ProbabilityDistributionFactory implements IProbabilityDistributionRegistry<CategoricalValue>,
         IProbabilityDistributionFactory<CategoricalValue> {
 
     private final Map<String, ProbabilityDistributionSupplier<CategoricalValue>> registry = new HashMap<>();
+    private final ISeedProvider seedProvider;
 
-    public ProbabilityDistributionFactory() {
+    public ProbabilityDistributionFactory(ISeedProvider seedProvider) {
+        this.seedProvider = seedProvider;
     }
 
     @Override
@@ -31,7 +34,7 @@ public class ProbabilityDistributionFactory implements IProbabilityDistributionR
         }
         ProbabilityDistributionFunction<CategoricalValue> pdf = supplier.get(distribution);
         if (pdf != null) {
-            pdf.init(0);
+            pdf.init(seedProvider);
         }
         return Optional.of(pdf);
     }

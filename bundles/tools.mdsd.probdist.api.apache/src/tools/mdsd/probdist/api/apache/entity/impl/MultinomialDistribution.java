@@ -9,6 +9,7 @@ import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.UnivariateProbabilitiyMassFunction;
 import tools.mdsd.probdist.api.entity.Value;
 import tools.mdsd.probdist.api.exception.ProbabilityDistributionException;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 
 public class MultinomialDistribution extends UnivariateProbabilitiyMassFunction {
@@ -27,12 +28,12 @@ public class MultinomialDistribution extends UnivariateProbabilitiyMassFunction 
     }
 
     @Override
-    public void init(int seed) {
+    public void init(ISeedProvider seedProvider) {
         if (initialized) {
             return;
         }
         initialized = true;
-        multDistribution.reseedRandomGenerator(seed);
+        multDistribution.reseedRandomGenerator(seedProvider.getLong());
     }
 
     @Override
