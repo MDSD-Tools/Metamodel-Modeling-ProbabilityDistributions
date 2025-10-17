@@ -6,11 +6,11 @@
 	<parent>
 		<groupId>tools.mdsd</groupId>
 		<artifactId>eclipse-parent-updatesite</artifactId>
-		<version>0.8.9</version>
+		<version>0.8.12</version>
 	</parent>
 	<groupId>tools.mdsd.probdist</groupId>
 	<artifactId>parent</artifactId>	
-	<version>0.1.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	
 	<properties>
@@ -25,3 +25,4 @@
 	</modules>
 	
 </project>
+
