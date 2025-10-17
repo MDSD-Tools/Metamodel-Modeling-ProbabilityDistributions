@@ -2,7 +2,7 @@
 <feature
       id="tools.mdsd.probdist.api.feature"
       label="MDSD.tools API and Implementation"
-      version="1.0.0.qualifier">
+      version="1.0.0">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -17,7 +17,7 @@
    </license>
 
    <requires>
-      <import feature="tools.mdsd.probdist.model.feature" version="1.0.0.qualifier"/>
+      <import feature="tools.mdsd.probdist.model.feature" version="1.0.0"/>
    </requires>
 
    <plugin

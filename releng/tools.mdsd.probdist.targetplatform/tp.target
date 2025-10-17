@@ -8,7 +8,7 @@
         <unit id="org.assertj" version="0.0.0"/>
     </location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly" refresh="true">
-        <repository location="https://updatesite.mdsd.tools/metamodel-modeling-foundations/nightly/"/>
+        <repository location="https://updatesite.mdsd.tools/metamodel-modeling-foundations/releases/1.0.0"/>
         <unit id="tools.mdsd.modelingfoundations.identifier.feature.feature.group" version="0.0.0"/>
 		<unit id="tools.mdsd.modelingfoundations.identifier.ui.feature.feature.group" version="0.0.0"/>
     </location>

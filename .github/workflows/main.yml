@@ -4,13 +4,14 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   Metamodel-Modeling-ProbabilityDistributions:
-    uses: PalladioSimulator/Palladio-Build-ActionsPipeline/.github/workflows/build.yml@v3.3
+    uses: PalladioSimulator/Palladio-Build-ActionsPipeline/.github/workflows/build.yml@master
     with:
       use-display-output: true
       no-caching: true
       java-version: 17
       runner-label: ubuntu-latest
       deploy-updatesite: 'releng/tools.mdsd.probdist.updatesite/target/repository'
+      release-version: 1.0.0
     secrets:
       SERVER_SSH_KEY: ${{ secrets.DEPLOYMENT_SERVER_SSH_KEY }}
       REMOTE_HOST: ${{ secrets.DEPLOYMENT_REMOTE_HOST }}

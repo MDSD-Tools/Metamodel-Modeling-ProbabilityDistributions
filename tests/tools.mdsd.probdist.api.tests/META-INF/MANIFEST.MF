@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: tools.mdsd.probdist.api.tests
 Bundle-SymbolicName: tools.mdsd.probdist.api.tests
-Bundle-Version: 0.1.0.qualifier
-Fragment-Host: tools.mdsd.probdist.api;bundle-version="0.1.0"
+Bundle-Version: 1.0.0
+Fragment-Host: tools.mdsd.probdist.api;bundle-version="1.0.0"
 Automatic-Module-Name: tools.mdsd.probdist.api.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.junit;bundle-version="4.13.0",

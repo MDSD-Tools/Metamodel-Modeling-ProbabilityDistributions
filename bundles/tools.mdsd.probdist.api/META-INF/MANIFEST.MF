@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Api
 Bundle-SymbolicName: tools.mdsd.probdist.api
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0
 Bundle-Activator: tools.mdsd.probdist.api.Activator
 Require-Bundle: org.eclipse.core.runtime,
- tools.mdsd.probdist.model;bundle-version="0.1.0",
+ tools.mdsd.probdist.model,
  org.apache.commons.math3;bundle-version="3.5.0",
  com.google.guava;bundle-version="21.0.0",
  org.apache.commons.lang3;bundle-version="3.1.0"

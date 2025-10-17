@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/tools.mdsd.probdist.model.feature_1.0.0.qualifier.jar" id="tools.mdsd.probdist.model.feature" version="1.0.0.qualifier">
+   <feature url="features/tools.mdsd.probdist.model.feature_1.0.0.jar" id="tools.mdsd.probdist.model.feature" version="1.0.0">
       <category name="probabilitydistributions"/>
    </feature>
-   <feature url="features/tools.mdsd.probdist.api.feature_1.0.0.qualifier.jar" id="tools.mdsd.probdist.api.feature" version="1.0.0.qualifier">
+   <feature url="features/tools.mdsd.probdist.api.feature_1.0.0.jar" id="tools.mdsd.probdist.api.feature" version="1.0.0">
       <category name="probabilitydistributions"/>
    </feature>
    <category-def name="probabilitydistributions" label="MDSD.tools Probability Distributions"/>

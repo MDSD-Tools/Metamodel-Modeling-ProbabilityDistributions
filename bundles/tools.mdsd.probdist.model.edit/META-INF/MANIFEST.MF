@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-SymbolicName: tools.mdsd.probdist.model.edit;singleton:=true
 Automatic-Module-Name: tools.mdsd.probdist.model.edit
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0
 Bundle-ClassPath: .
 Bundle-Activator: tools.mdsd.probdist.distributiontype.provider.ProbdistEditPlugin$Implementation
 Bundle-Vendor: %providerName
